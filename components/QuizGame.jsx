@@ -40,7 +40,8 @@ export default function QuizGame() {
   const [usedChoiceQuestions, setUsedChoiceQuestions] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState({});
 
-  // World Tour State
+  // ✅ World Tour State - إضافة showWorldMap
+  const [showWorldMap, setShowWorldMap] = useState(false);
   const [currentWorldQuestion, setCurrentWorldQuestion] = useState(null);
   const [showWorldAnswer, setShowWorldAnswer] = useState(false);
   const [occupiedCountries, setOccupiedCountries] = useState([]);
@@ -65,6 +66,20 @@ export default function QuizGame() {
   const [teamQuestionMap, setTeamQuestionMap] = useState({});
   const [usedQuestions, setUsedQuestions] = useState(new Set());
   const [isAbsiMode, setIsAbsiMode] = useState(false);
+
+  // ✅ وظيفة جديدة لبدء فقرة حول العالم
+  const startWorldTour = () => {
+    if (!currentQuestion && !currentChoiceQuestion && !currentWorldQuestion) {
+      setShowWorldMap(true);
+    }
+  };
+
+  // ✅ وظيفة جديدة لإغلاق خريطة العالم
+  const closeWorldMap = () => {
+    setShowWorldMap(false);
+    setCurrentWorldQuestion(null);
+    setShowWorldAnswer(false);
+  };
 
   // Image Functions
   const zoomImage = (imageUrl) => {
@@ -324,9 +339,18 @@ export default function QuizGame() {
       setCurrentWorldQuestion(null);
       setShowWorldAnswer(false);
       
-      setTimeout(() => {
-        checkGameEnd();
-      }, 100);
+      // ✅ التحقق من انتهاء جميع الدول
+      const worldTopic = selectedTopics.find(t => t.id === 'world_tour');
+      if (worldTopic && occupiedCountries.length + 1 >= worldTopic.countries.length) {
+        setTimeout(() => {
+          closeWorldMap();
+          checkGameEnd();
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          checkGameEnd();
+        }, 100);
+      }
     }
   };
 
@@ -336,9 +360,18 @@ export default function QuizGame() {
       setCurrentWorldQuestion(null);
       setShowWorldAnswer(false);
       
-      setTimeout(() => {
-        checkGameEnd();
-      }, 100);
+      // ✅ التحقق من انتهاء اللعبة
+      const worldTopic = selectedTopics.find(t => t.id === 'world_tour');
+      if (worldTopic && occupiedCountries.length >= worldTopic.countries.length) {
+        setTimeout(() => {
+          closeWorldMap();
+          checkGameEnd();
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          checkGameEnd();
+        }, 100);
+      }
     }
   };
 
@@ -547,6 +580,7 @@ export default function QuizGame() {
       red: [],
       blue: []
     });
+    setShowWorldMap(false); // ✅ إضافة هذا السطر
     
     resetTimer();
     
@@ -579,12 +613,12 @@ export default function QuizGame() {
 
   // Overflow Effect
   useEffect(() => {
-    if (showConfirmReset || zoomedImage || currentChoiceQuestion) {
+    if (showConfirmReset || zoomedImage || currentChoiceQuestion || showWorldMap) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-  }, [showConfirmReset, zoomedImage, currentChoiceQuestion]);
+  }, [showConfirmReset, zoomedImage, currentChoiceQuestion, showWorldMap]);
 
   // Render Different Game States
   if (gameState === 'setup') {
@@ -597,6 +631,43 @@ export default function QuizGame() {
 
   return (
     <>
+      {/* ✅ عرض خريطة العالم كـ modal منفصل */}
+      {showWorldMap && (
+        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm overflow-y-auto">
+          <div className="min-h-screen p-4">
+            {/* زر الإغلاق */}
+            <div className="text-center mb-4">
+              <button
+                onClick={closeWorldMap}
+                className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg transition-all duration-300"
+              >
+                ✕ إغلاق الخريطة
+              </button>
+            </div>
+
+            {/* خريطة العالم */}
+            <WorldMap 
+              worldTopic={selectedTopics.find(t => t.id === 'world_tour')}
+              currentTurn={currentTurn}
+              currentQuestion={currentQuestion}
+              currentChoiceQuestion={currentChoiceQuestion}
+              occupiedCountries={occupiedCountries}
+              selectCountry={selectCountry}
+              teamCountries={teamCountries}
+            />
+
+            {/* عرض السؤال */}
+            <WorldQuestion 
+              currentWorldQuestion={currentWorldQuestion}
+              showWorldAnswer={showWorldAnswer}
+              finishWorldAnswering={finishWorldAnswering}
+              awardWorldPoints={awardWorldPoints}
+              noCorrectWorldAnswer={noCorrectWorldAnswer}
+            />
+          </div>
+        </div>
+      )}
+
       {/* الناف بار - التوقيت ودور الفريق فقط */}
       <NavBar 
         currentTurn={currentTurn}
@@ -650,29 +721,12 @@ export default function QuizGame() {
             closeChoiceQuestion={closeChoiceQuestion}
           />
 
-          <WorldQuestion 
-            currentWorldQuestion={currentWorldQuestion}
-            showWorldAnswer={showWorldAnswer}
-            finishWorldAnswering={finishWorldAnswering}
-            awardWorldPoints={awardWorldPoints}
-            noCorrectWorldAnswer={noCorrectWorldAnswer}
-          />
-
-          <WorldMap 
-            worldTopic={selectedTopics.find(t => t.id === 'world_tour')}
-            currentTurn={currentTurn}
-            currentQuestion={currentQuestion}
-            currentChoiceQuestion={currentChoiceQuestion}
-            occupiedCountries={occupiedCountries}
-            selectCountry={selectCountry}
-            teamCountries={teamCountries}
-          />
-
           <TopicGrid 
             selectedTopics={selectedTopics}
             currentTurn={currentTurn}
             currentQuestion={currentQuestion}
             currentChoiceQuestion={currentChoiceQuestion}
+            currentWorldQuestion={currentWorldQuestion}
             usedChoiceQuestions={usedChoiceQuestions}
             selectChoiceQuestion={selectChoiceQuestion}
             selectRandomQuestionForTeam={selectRandomQuestionForTeam}
@@ -682,6 +736,8 @@ export default function QuizGame() {
             setShowConfirmReset={setShowConfirmReset}
             occupiedCountries={occupiedCountries}
             teamCountries={teamCountries}
+            startWorldTour={startWorldTour} // ✅ تمرير الوظيفة الجديدة
+            showWorldMap={showWorldMap} // ✅ تمرير حالة العرض
           />
 
           <ImageModal zoomedImage={zoomedImage} closeZoomedImage={closeZoomedImage} />
