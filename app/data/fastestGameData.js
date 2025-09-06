@@ -3,128 +3,128 @@
 export const fastestQuestions = [
   {
     id: 'fastest1',
-    question: 'ما هو أكبر كوكب في المجموعة الشمسية؟',
-    answer: 'المشتري',
+    question: 'ما هو أسرع طائر في العالم؟',
+    answer: 'الصقر الجوال',
     points: 100
   },
   {
     id: 'fastest2', 
-    question: 'كم عدد قارات العالم؟',
-    answer: 'سبع قارات',
+    question: 'كم عدد الكواكب في المجموعة الشمسية؟',
+    answer: 'ثمانية كواكب',
     points: 100
   },
   {
     id: 'fastest3',
-    question: 'ما هو أطول نهر في العالم؟',
-    answer: 'نهر النيل',
+    question: 'ما هي عاصمة كندا؟',
+    answer: 'أوتاوا',
     points: 100
   },
   {
     id: 'fastest4',
-    question: 'من هو أول من صعد إلى القمر؟',
-    answer: 'نيل أرمسترونغ',
+    question: 'من هو مكتشف الجاذبية؟',
+    answer: 'إسحاق نيوتن',
     points: 100
   },
   {
     id: 'fastest5',
-    question: 'ما هي أكبر دولة في العالم من حيث المساحة؟',
-    answer: 'روسيا',
+    question: 'أين يقع برج إيفل؟',
+    answer: 'باريس',
     points: 100
   },
   {
     id: 'fastest6',
-    question: 'ما هو العنصر الكيميائي الذي يرمز له بالرمز "O"؟',
-    answer: 'الأوكسجين',
+    question: 'ما هي عاصمة المغرب؟',
+    answer: 'الرباط',
     points: 100
   },
   {
     id: 'fastest7',
-    question: 'من هو مؤلف رواية "مئة عام من العزلة"؟',
-    answer: 'غابرييل غارسيا ماركيز',
+    question: 'من هو مؤلف كتاب "الجمهورية"؟',
+    answer: 'أفلاطون',
     points: 100
   },
   {
     id: 'fastest8',
-    question: 'ما هو الحيوان الذي يلقب بملك الغابة؟',
-    answer: 'الأسد',
+    question: 'ما هو البحر الذي يفصل بين أوروبا وإفريقيا؟',
+    answer: 'البحر الأبيض المتوسط',
     points: 100
   },
   {
     id: 'fastest9',
-    question: 'ما هو أسرع حيوان بري؟',
-    answer: 'الفهد',
+    question: 'كم عدد ألوان قوس قزح؟',
+    answer: 'سبعة ألوان',
     points: 100
   },
   {
     id: 'fastest10',
-    question: 'ما هي عاصمة اليابان؟',
-    answer: 'طوكيو',
+    question: 'ما هي اللغة الرسمية في البرازيل؟',
+    answer: 'البرتغالية',
     points: 100
   },
   {
     id: 'fastest11',
-    question: 'اشتق اسم اخر لرجل من اسم فالح؟',
-    answer: 'مفلح',
+    question: 'من هو أول رئيس للولايات المتحدة؟',
+    answer: 'جورج واشنطن',
     points: 100
   },
   {
     id: 'fastest12',
-    question: 'دولة عربية عملتها الجنية؟',
-    answer: 'مصر',
+    question: 'في أي قارة تقع مصر؟',
+    answer: 'إفريقيا',
     points: 100
   },
   {
     id: 'fastest13',
-    question: 'كيف كان الناس يتواصلون مع بعضهم؟',
-    answer: 'الرسائل',
+    question: 'ما هي أكبر قارة في العالم؟',
+    answer: 'آسيا',
     points: 100
   },
   {
     id: 'fastest14',
-    question: 'اشهر نوع من انواع الزهور؟',
-    answer: 'الورد الجوري',
+    question: 'ما هي وحدة قياس الصوت؟',
+    answer: 'ديسيبل',
     points: 100
   },
   {
     id: 'fastest15',
-    question: 'مسحوق أبيض يستخدم في الطعام؟',
-    answer: 'ملح',
+    question: 'من هو مؤسس شركة مايكروسوفت؟',
+    answer: 'بيل غيتس',
     points: 100
   },
   {
     id: 'fastest16',
-    question: 'سمي جهاز يستخدم للتبريد؟',
-    answer: 'كونديشن أو ثلاجة',
+    question: 'ما هو الكوكب الأحمر؟',
+    answer: 'المريخ',
     points: 100
   },
   {
     id: 'fastest17',
-    question: 'سمي رقم 5/5 في لعبة الدومنة؟',
-    answer: 'دوبيش',
+    question: 'في أي دولة توجد ساعة بيغ بن؟',
+    answer: 'المملكة المتحدة',
     points: 100
   },
   {
     id: 'fastest18',
-    question: 'اذكر احد الضواهر الطبيعية؟',
-    answer: 'شروق الشمس أو الضباب أو الرعد أو الإعصار أو الزلزال',
+    question: 'ما هو الغاز الذي يتنفسه الإنسان؟',
+    answer: 'الأوكسجين',
     points: 100
   },
   {
     id: 'fastest19',
-    question: 'اذكر الفائز بآخر كرة ذهبية؟',
-    answer: 'رودري',
+    question: 'ما هي الدولة التي اخترعت الباستا؟',
+    answer: 'إيطاليا',
     points: 100
   },
   {
     id: 'fastest20',
-    question: 'اسم يوم ليس مأخوذاً من رقم؟',
-    answer: 'الجمعة',
+    question: 'من هو مخترع المصباح الكهربائي؟',
+    answer: 'توماس إديسون',
     points: 100
   },
   {
     id: 'fastest21',
-    question: 'كم ساعة بث عبسي البارحة؟',
-    answer: '5',
+    question: 'ما هو أعلى جبل في العالم؟',
+    answer: 'جبل إيفرست',
     points: 100
   }
 ];

@@ -1,5 +1,8 @@
 // components/WorldQuestion.jsx
-import React, { useEffect } from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 export default function WorldQuestion({ 
   currentWorldQuestion,
@@ -8,34 +11,39 @@ export default function WorldQuestion({
   awardWorldPoints,
   noCorrectWorldAnswer
 }) {
-  // ✅ منع التمرير خلف الـ modal ومنع تمرير الصفحة
+  // نتأكد إننا على الكلاينت قبل استخدام document
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  // قفل/فتح السكرول + رجوع للأعلى عند فتح السؤال
   useEffect(() => {
+    if (!mounted) return;
     if (currentWorldQuestion) {
+      // اقفل سكرول الصفحة
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.height = '100%';
-      
-      return () => {
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.width = '';
-        document.body.style.height = '';
-      };
+      // رجّع viewport لفوق (مش سكرول كونتينر داخلي)
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
-  }, [currentWorldQuestion]);
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
+  }, [mounted, currentWorldQuestion]);
 
-  if (!currentWorldQuestion) return null;
+  if (!mounted || !currentWorldQuestion) return null;
 
-  return (
-    // ✅ عرض كـ popup/modal overlay مع تموضع أفضل
-    <div className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
-      <div className="bg-slate-800/95 backdrop-blur-lg rounded-2xl p-4 md:p-8 max-w-4xl w-full max-h-[85vh] overflow-y-auto border border-slate-600 shadow-2xl transform translate-y-0">
-        
+  const modal = (
+    // مودال ثابت يغطي الشاشة—دائمًا بمنتصف الـ viewport
+    <div
+      className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+      // امنع تمرير الأحداث للخلفية
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+    >
+      <div className="bg-slate-800/95 backdrop-blur-lg rounded-2xl p-4 md:p-8 max-w-4xl w-full max-h-[85vh] overflow-y-auto overscroll-contain border border-slate-600 shadow-2xl">
         <div className="text-center mb-4 md:mb-6">
-          {/* معلومات الدولة - ✅ بدون رموز، فقط اسم البلد */}
           <div className="flex justify-center items-center gap-4 mb-4">
-         
             <div>
               <h2 className="text-xl md:text-3xl font-bold text-white mb-2">
                 {currentWorldQuestion.country.name}
@@ -45,14 +53,12 @@ export default function WorldQuestion({
               </span>
             </div>
           </div>
-
-          {/* ✅ لا نعرض مؤشر الصعوبة - سيكون مفاجأة! */}
         </div>
-        
+
         <h3 className="text-lg md:text-2xl font-bold text-center mb-6 md:mb-8 text-slate-100">
           {currentWorldQuestion.question}
         </h3>
-        
+
         {!showWorldAnswer ? (
           <div className="text-center">
             <button
@@ -65,25 +71,34 @@ export default function WorldQuestion({
         ) : (
           <div className="text-center">
             <div className="bg-emerald-500/20 border border-emerald-400/50 rounded-xl p-4 md:p-6 mb-6 md:mb-8 backdrop-blur-sm">
-              <h4 className="text-base md:text-lg font-bold text-emerald-400 mb-2 md:mb-3">الإجابة الصحيحة:</h4>
-              <p className="text-lg md:text-2xl text-white font-semibold mb-4">{currentWorldQuestion.answer}</p>
-              
-              {/* ✅ عرض مستوى الصعوبة فقط بعد الإجابة كمعلومة إضافية */}
+              <h4 className="text-base md:text-lg font-bold text-emerald-400 mb-2 md:mb-3">
+                الإجابة الصحيحة:
+              </h4>
+              <p className="text-lg md:text-2xl text-white font-semibold mb-4">
+                {currentWorldQuestion.answer}
+              </p>
+
               {currentWorldQuestion.hiddenDifficulty && (
                 <div className="mt-3">
-                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
-                    currentWorldQuestion.hiddenDifficulty === 'easy' ? 'bg-green-500 text-white' :
-                    currentWorldQuestion.hiddenDifficulty === 'medium' ? 'bg-yellow-500 text-black' : 
-                    'bg-red-500 text-white'
-                  }`}>
-                    {currentWorldQuestion.hiddenDifficulty === 'easy' ? 'سؤال سهل' :
-                     currentWorldQuestion.hiddenDifficulty === 'medium' ? 'سؤال متوسط' : 
-                     'سؤال صعب'}
+                  <span
+                    className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
+                      currentWorldQuestion.hiddenDifficulty === 'easy'
+                        ? 'bg-green-500 text-white'
+                        : currentWorldQuestion.hiddenDifficulty === 'medium'
+                        ? 'bg-yellow-500 text-black'
+                        : 'bg-red-500 text-white'
+                    }`}
+                  >
+                    {currentWorldQuestion.hiddenDifficulty === 'easy'
+                      ? 'سؤال سهل'
+                      : currentWorldQuestion.hiddenDifficulty === 'medium'
+                      ? 'سؤال متوسط'
+                      : 'سؤال صعب'}
                   </span>
                 </div>
               )}
             </div>
-            
+
             <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-6">
               <button
                 onClick={() => awardWorldPoints('red')}
@@ -109,4 +124,7 @@ export default function WorldQuestion({
       </div>
     </div>
   );
+
+  // 🚀 نركّب المودال على <body> مباشرة
+  return createPortal(modal, document.body);
 }

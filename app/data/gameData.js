@@ -6,16 +6,7 @@ export const sampleTopics = [
 {
   id: 'absi',
   name: 'لايفات عبسي',
-  questions:  [ { 
-      id: 'absi1', 
-      question: 'كم حمار ب الصورة', 
-      answer: '1 ', 
-      difficulty: 'easy', 
-      points: 200,
-      mediaType: 'image',
-      hasImage: true,
-      imageUrl: '../../4.jpg'
-    },
+  questions:  [ 
     { 
       id: 'absi2', 
       question: 'ماذا قال عبسي ', 
@@ -140,16 +131,7 @@ export const sampleTopics = [
       hasImage: true,
       imageUrl: '../../29.jpg'
     },
-    { 
-      id: 'absi14', 
-      question: 'ماذا كان يغني عبسي ', 
-      answer: ' وا عيني ', 
-      difficulty: 'hard', 
-      points: 600,
-     mediaType: 'image',
-      hasImage: true,
-      imageUrl: '../../15.jpg'
-    },
+
     { 
       id: 'absi15', 
       question: ' ماذا قال ماهركو لعبسي', 
@@ -326,7 +308,7 @@ export const sampleTopics = [
       },
     { 
       id: 'absi32', 
-      question: ' ماذا فعل الاستاز وجدي بعبسي', 
+      question: ' ماذا فعل المدرس وجدي بعبسي', 
       answer: ' قرصو من بزو ', 
       difficulty: 'medium', 
       points: 400,
@@ -344,35 +326,8 @@ export const sampleTopics = [
       imageUrl: '../../40.jpg' 
     },
     ////////////////4
-      { 
-        id: 'absi34', 
-        question: '     من صاحب النصيب', 
-        answer: '  مصري بعد ما سرق الشدات   ', 
-        difficulty: 'easy', 
-        points: 200,
-      mediaType: 'image',
-      hasImage: true,
-      imageUrl: '../../42.jpg'
-      },
-    { 
-      id: 'absi35', 
-      question: ' عبسي بدو يخبر الشرطة انو علمدار قال راح اهين الشرطة و اجا لاق شو اللاق ', 
-      answer: ' اهو اهي اهو  ', 
-      difficulty: 'medium', 
-      points: 400,
-      mediaType: 'image',
-      hasImage: true,
-      imageUrl: '../../41.jpg'
-    }, { 
-      id: 'absi36', 
-      question: ' ماذا قال عبسي', 
-      answer: ' حازم 100 دولار لكل الشباب (بس بقولو ما وصل شي )', 
-      difficulty: 'hard', 
-      points: 600,
-      mediaType: 'image',
-      hasImage: true,
-      imageUrl: '../../43.jpg' 
-    },
+  
+ 
     ////////////////
       { 
         id: 'absi37', 
@@ -468,15 +423,7 @@ export const sampleTopics = [
   hasAudio: true,
   audioUrl: '../../absi messi.mp3'
 },
-    {
-  id: 'absi47',
-  question: '  مين يلي عم يفوتلو ايا  ',
-  answer: ' حازم للكرسي',
-  difficulty: 'medium',
-  points: 400,
-  hasAudio: true,
-  audioUrl: '../../absi korsi.mp3'
-}, {
+     {
   id: 'absi48',
   question: '   متى هذه اللحظة  ',
   answer: '   الخيل من خيالها اول مرة  ',
@@ -492,120 +439,123 @@ export const sampleTopics = [
 {
   id: 'choices',
   name: 'الاختيارات',
-  questions: [
-    {
-      id: 'choice1',
-      question: 'اذكر سبب يجعل الطفل يستيقظ من النوم باكيا',
-      answers: [
-        { text: ' الالم او المرض', points: 50 },
-        { text: '  الجوع', points: 40 },
-        { text: '  العطش', points: 30 },
-        { text: '  الكابوس', points: 25 },
-        { text: 'البرد ', points: 20 },
-        { text: '  الحر', points: 15 },
-        { text: ' الضوضاء', points: 10 }
-      ],
-      order: 1
-    },
-    {
-      id: 'choice2',
-      question: 'اذكر اكثر حركات مشهورة يفعلها عبسي خلال البث',
-      answers: [
-        { text: ' يقول مصري وينك', points: 50 },
-        { text: ' لاك', points: 40 },
-        { text: 'يكذب', points: 30 },
-        { text: ' يروح على الحمام', points: 25 },
-        { text: ' يطلع لسانة ', points: 20 },
-        { text: ' يدخن', points: 15 },
-        { text: 'يصرخ', points: 10 }
-      ],
-      order: 2
-    },
-    {
-      id: 'choice3',
-      question: 'اذكر اهم ملصقات يعبرو بها  الجمهور عن الغضب',
-      answers: [
-        { text: 'بسيط', points: 50 },
-        { text: 'تكرار بسيط', points: 40 },
-        { text: 'جيش الطرد ', points: 30 },
-        { text: ' جيش الحسبنة ', points: 25 },
-        { text: 'جيش 🚨', points: 20 },
-        { text: ' جيش المطايزة', points: 15 },
-        { text: 'جيش النجوم', points: 10 }
-      ],
-      order: 3
-    },
-    {
-      id: 'choice4',
-      question: 'اذكر حاجة موجودة في الصف الدراسي',
-      answers: [
-        { text: 'سبورة', points: 50 },
-        { text: 'مقاعد', points: 40 },
-        { text: 'كتب', points: 30 },
-        { text: ' طباشير', points: 25 },
-        { text: ' دفاتر', points: 20 },
-        { text: 'اقلام', points: 15 },
-        { text: 'ممحاة', points: 10 }
-      ],
-      order: 4
-    },
-    {
-      id: 'choice5',
-      question: 'اذكر لغات اكثر استخداما في العالم غير العربية',
-      answers: [
-        { text: 'الإنجليزية', points: 50 },
-        { text: 'الصينية', points: 40 },
-        { text: 'الهندية', points: 30 },
-        { text: 'الإسبانية', points: 25 },
-        { text: 'الفرنسية', points: 20 },
-        { text: 'البرتغالية', points: 15 },
-        { text: 'الروسية', points: 10 }
-      ],
-      order: 5
-    },
-    {
-      id: 'choice6',
-      question: 'اذكر اهم الاشياء التي يفعلها عبسي عندما يدخل قراند',
-      answers: [
-        { text: 'يطرد تيم الغرفه ولدس', points: 50 },
-        { text: 'يفتح ستيم', points: 40 },
-        { text: 'يفتح فايف ام ', points: 30 },
-        { text: 'يخنق المتابعين', points: 25 },
-        { text: 'يستخرج المركبة ', points: 20 },
-        { text: 'يدخل الموجة', points: 15 },
-        { text: 'يذهب الى الورشه', points: 10 }
-      ],
-      order: 6
-    },
-    {
-      id: 'choice7',
-      question: 'اذكر أسم حيوان يبداء بحرف ( ف )',
-      answers: [
-        { text: 'فأر', points: 50 },
-        { text: 'فيل ', points: 40 },
-        { text: 'فهد', points: 30 },
-        { text: ' فرس', points: 25 },
-        { text: 'فقمة', points: 20 },
-        { text: 'فراشة', points: 15 },
-        { text: ' فرس النهر', points: 10 }
-      ],
-      order: 7
-    },
-    {
-      id: 'choice8',
-      question: 'سمي شيىء يجعلك تشرب الماء',
-      answers: [
-        { text: 'العطش', points: 50 },
-        { text: 'الخوف', points: 40 },
-        { text: ' المرض ', points: 30 },
-        { text: ' العلاج', points: 25 },
-        { text: ' نيه الصوم', points: 20 },
-        { text: 'التوتر ', points: 15 },
-        { text: 'خسارة الوزن', points: 10 }
-      ],
-      order: 8
-    }
-  ]
+questions: [
+  {
+    id: 'choice1',
+    question: 'اذكر شيئاً يوجد في المطبخ',
+    answers: [
+      { text: 'ثلاجة', points: 50 },
+      { text: 'غاز', points: 40 },
+      { text: 'صحون', points: 30 },
+      { text: 'ملاعق', points: 25 },
+      { text: 'مغسلة', points: 20 },
+      { text: 'صواني', points: 15 },
+      { text: 'خزانة', points: 10 }
+    ],
+    order: 1
+  },
+{
+  id: 'choice2',
+  question: 'اذكر شيئاً نجده في الحديقة',
+  answers: [
+    { text: 'أشجار', points: 50 },
+    { text: 'أزهار', points: 40 },
+    { text: 'عشب', points: 30 },
+    { text: 'مقاعد', points: 25 },
+    { text: 'طيور', points: 20 },
+    { text: 'نافورة', points: 15 },
+    { text: 'ألعاب أطفال', points: 10 }
+  ],
+  order: 2
+}
+,
+  {
+    id: 'choice3',
+    question: 'اذكر وسيلة من وسائل المواصلات',
+    answers: [
+      { text: 'سيارة', points: 50 },
+      { text: 'قطار', points: 40 },
+      { text: 'طائرة', points: 30 },
+      { text: 'باص', points: 25 },
+      { text: 'دراجة', points: 20 },
+      { text: 'سفينة', points: 15 },
+      { text: 'تاكسي', points: 10 }
+    ],
+    order: 3
+  },
+  {
+    id: 'choice4',
+    question: 'اذكر شيئاً يضيء في الليل',
+    answers: [
+      { text: 'القمر', points: 50 },
+      { text: 'المصباح', points: 40 },
+      { text: 'النجوم', points: 30 },
+      { text: 'النار', points: 25 },
+      { text: 'الشمعة', points: 20 },
+      { text: 'البرق', points: 15 },
+      { text: 'المصابيح اليدوية', points: 10 }
+    ],
+    order: 4
+  },
+  {
+    id: 'choice5',
+    question: 'اذكر رياضة مشهورة في العالم',
+    answers: [
+      { text: 'كرة القدم', points: 50 },
+      { text: 'كرة السلة', points: 40 },
+      { text: 'التنس', points: 30 },
+      { text: 'السباحة', points: 25 },
+      { text: 'الملاكمة', points: 20 },
+      { text: 'كرة الطائرة', points: 15 },
+      { text: 'الجري', points: 10 }
+    ],
+    order: 5
+  },
+  {
+    id: 'choice6',
+    question: 'اذكر شيئاً تجده في البحر',
+    answers: [
+      { text: 'الأسماك', points: 50 },
+      { text: 'الأمواج', points: 40 },
+      { text: 'الطحالب', points: 30 },
+      { text: 'الشعب المرجانية', points: 25 },
+      { text: 'القواقع', points: 20 },
+      { text: 'السفن', points: 15 },
+      { text: 'الرمال', points: 10 }
+    ],
+    order: 6
+  },
+  {
+    id: 'choice7',
+    question: 'اذكر كوكباً من المجموعة الشمسية',
+    answers: [
+      { text: 'الأرض', points: 50 },
+      { text: 'المشتري', points: 40 },
+      { text: 'زحل', points: 30 },
+      { text: 'المريخ', points: 25 },
+      { text: 'عطارد', points: 20 },
+      { text: 'أورانوس', points: 15 },
+      { text: 'نبتون', points: 10 }
+    ],
+    order: 7
+  },
+{
+  id: 'choice8',
+  question: 'اذكر شيئاً يوجد في الصحراء',
+  answers: [
+    { text: 'رمال', points: 50 },
+    { text: 'جِمال', points: 40 },
+    { text: 'صخور', points: 30 },
+    { text: 'شمس', points: 25 },
+    { text: 'واحة', points: 20 },
+    { text: 'ثعابين', points: 15 },
+    { text: 'نخيل', points: 10 }
+  ],
+  order: 8
+}
+
+]
+
 },
 
 // ✅ إضافة فقرة "ولا كلمة" الجديدة مع QR codes

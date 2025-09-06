@@ -70,9 +70,7 @@ export default function GameFinished({ teams, isAbsiMode, resetGame }) {
           {isAbsiMode && (
             <div className="mb-6 md:mb-8 p-4 bg-slate-700/50 rounded-xl">
               <h3 className="text-lg md:text-xl font-bold text-slate-200 mb-3">🎉 تم إنهاء جميع الفقرات بنجاح!</h3>
-              <p className="text-slate-300 text-sm md:text-base">
-                تم لعب جميع الأسئلة المتاحة من فقرات لايفات عبسي والاختيارات وولا كلمة
-              </p>
+       
             </div>
           )}
           
