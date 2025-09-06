@@ -294,25 +294,52 @@ export default function QuizGame() {
     }, 100);
   };
 
+
+
+  useEffect(() => {
+  if (showConfirmReset || zoomedImage || currentChoiceQuestion || showWorldMap || currentWorldQuestion) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}, [showConfirmReset, zoomedImage, currentChoiceQuestion, showWorldMap, currentWorldQuestion]);
+
+
   // World Tour Functions
-  const selectCountry = (country) => {
-    if (currentTurn && !currentQuestion && !currentChoiceQuestion && !currentWorldQuestion) {
-      // اختيار سؤال عشوائي من أسئلة الدولة
-      const randomQuestion = country.questions[Math.floor(Math.random() * country.questions.length)];
-      
-      setCurrentWorldQuestion({
-        ...randomQuestion,
-        country: country
-      });
-      setShowWorldAnswer(false);
-      
-      stopTimer();
-      setTimer(0);
-      setTimeout(() => {
-        startTimer();
-      }, 100);
+
+// World Tour Functions
+const selectCountry = (country) => {
+  if (currentTurn && !currentQuestion && !currentChoiceQuestion && !currentWorldQuestion) {
+    // ✅ اختيار صعوبة عشوائية (سهل، متوسط، صعب)
+    const difficulties = ['easy', 'medium', 'hard'];
+    const randomDifficulty = difficulties[Math.floor(Math.random() * difficulties.length)];
+    
+    // اختيار سؤال عشوائي من الصعوبة المختارة
+    const questionsWithDifficulty = country.questions.filter(q => q.difficulty === randomDifficulty);
+    let selectedQuestion;
+    
+    // إذا لم توجد أسئلة بالصعوبة المختارة، اختر أي سؤال متاح
+    if (questionsWithDifficulty.length > 0) {
+      selectedQuestion = questionsWithDifficulty[Math.floor(Math.random() * questionsWithDifficulty.length)];
+    } else {
+      selectedQuestion = country.questions[Math.floor(Math.random() * country.questions.length)];
     }
-  };
+    
+    setCurrentWorldQuestion({
+      ...selectedQuestion,
+      country: country,
+      // ✅ لا نعرض الصعوبة للمستخدم - سيكون مفاجأة!
+      hiddenDifficulty: selectedQuestion.difficulty
+    });
+    setShowWorldAnswer(false);
+    
+    stopTimer();
+    setTimer(0);
+    setTimeout(() => {
+      startTimer();
+    }, 100);
+  }
+};
 
   const finishWorldAnswering = () => {
     setShowWorldAnswer(true);

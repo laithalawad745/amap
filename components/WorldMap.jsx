@@ -20,44 +20,34 @@ export default function WorldMap({
         </h3>
         <div className="bg-slate-700/30 backdrop-blur-sm rounded-xl p-4 border border-emerald-500/30">
           <p className="text-slate-300 text-sm md:text-base mb-2">
-            <span className="text-emerald-400 font-bold">⚔️ قواعد اللعب:</span> اختر دولة للإجابة على سؤال عنها
+            <span className="text-emerald-400 font-bold">⚔️ قواعد اللعب:</span> اختر دولة أوروبية للإجابة على سؤال عنها
           </p>
           <p className="text-slate-400 text-xs md:text-sm">
-            كل إجابة صحيحة تحتل الدولة وتكسب نقاطها • {worldTopic.countries.length} دولة متاحة للاحتلال
+            كل إجابة صحيحة تحتل الدولة وتكسب نقاطها • {worldTopic.countries.length} دولة أوروبية متاحة للاحتلال
           </p>
         </div>
       </div>
 
-      {/* خريطة العالم المحسّنة */}
-      <div className="relative bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 rounded-xl p-6 min-h-[500px] md:min-h-[600px] overflow-hidden border-2 border-slate-600/50 shadow-2xl">
-        {/* خلفية خريطة العالم مع نقش */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 via-blue-500/20 to-purple-500/20"></div>
-          {/* خطوط خرائط أنيقة */}
-          {[...Array(6)].map((_, i) => (
-            <div 
-              key={`lat-${i}`} 
-              className="absolute w-full border-t border-emerald-300/30" 
-              style={{ top: `${15 + i * 15}%` }} 
-            />
-          ))}
-          {[...Array(8)].map((_, i) => (
-            <div 
-              key={`lng-${i}`} 
-              className="absolute h-full border-l border-emerald-300/30" 
-              style={{ left: `${10 + i * 12}%` }} 
-            />
-          ))}
-        </div>
+      {/* 🖥️ عرض الخريطة للشاشات الكبيرة (مخفي على الهاتف) */}
+      <div className="hidden md:block relative bg-slate-800 rounded-xl p-6 min-h-[500px] md:min-h-[600px] overflow-hidden border-2 border-slate-600/50 shadow-2xl">
+        
+        {/* ✅ صورة خريطة أوروبا الحقيقية كخلفية - للشاشات الكبيرة فقط */}
+        <div 
+          className="absolute inset-0 bg-no-repeat opacity-50 rounded-xl"
+          style={{
+            backgroundImage: `url('/europe-map.png')`,
+            backgroundSize: '85%',           // ✅ الحجم المفضل لديك
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
 
-        {/* عنوان فرعي */}
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
-          <div className="bg-slate-800/80 backdrop-blur-sm rounded-full px-4 py-2 border border-emerald-400/50">
-            <span className="text-emerald-400 font-bold text-sm">🗺️ اختر دولة للهجوم عليها</span>
-          </div>
-        </div>
+        {/* طبقة شفافة لتحسين وضوح النص */}
+        <div className="absolute inset-0 bg-slate-900/30 rounded-xl"></div>
 
-        {/* عرض الدول المحسّن */}
+  
+
+        {/* عرض الدول فوق الخريطة - للشاشات الكبيرة */}
         {worldTopic.countries.map(country => {
           const isOccupied = occupiedCountries.includes(country.id);
           const occupiedByTeam = teamCountries.red.includes(country.id) ? 'red' : 
@@ -65,60 +55,96 @@ export default function WorldMap({
           const canSelect = currentTurn && !currentQuestion && !currentChoiceQuestion && !isOccupied;
 
           return (
-            <button
-              key={country.id}
-              onClick={() => canSelect && selectCountry(country)}
-              disabled={!canSelect}
-              className={`absolute transform -translate-x-1/2 -translate-y-1/2 px-3 md:px-4 py-2 md:py-3 rounded-xl font-bold text-xs md:text-sm transition-all duration-500 border-2 min-w-[90px] md:min-w-[110px] shadow-lg backdrop-blur-sm ${
-                isOccupied
-                  ? occupiedByTeam === 'red'
-                    ? 'bg-gradient-to-br from-red-600 to-red-700 text-white border-red-400 shadow-red-500/50 ring-2 ring-red-400/30'
-                    : 'bg-gradient-to-br from-blue-600 to-blue-700 text-white border-blue-400 shadow-blue-500/50 ring-2 ring-blue-400/30'
-                  : canSelect
-                  ? currentTurn === 'red'
-                    ? 'bg-gradient-to-br from-gray-600 to-gray-700 hover:from-red-500 hover:to-red-600 text-white border-gray-400 hover:border-red-400 hover:scale-110 shadow-xl hover:shadow-red-500/30 ring-2 ring-gray-400/20 hover:ring-red-400/40'
-                    : 'bg-gradient-to-br from-gray-600 to-gray-700 hover:from-blue-500 hover:to-blue-600 text-white border-gray-400 hover:border-blue-400 hover:scale-110 shadow-xl hover:shadow-blue-500/30 ring-2 ring-gray-400/20 hover:ring-blue-400/40'
-                  : 'bg-gradient-to-br from-gray-700 to-gray-800 text-gray-400 border-gray-600 cursor-not-allowed opacity-50'
-              }`}
-              style={{
-                left: `${country.position.x}%`,
-                top: `${country.position.y}%`
-              }}
-              title={isOccupied ? `محتلة بواسطة ${occupiedByTeam === 'red' ? 'الفريق الأحمر' : 'الفريق الأزرق'}` : `${country.name} - ${country.points} نقطة`}
-            >
-              <div className="flex flex-col items-center gap-1">
-                <span className="text-xl md:text-2xl">{country.flag}</span>
-                <span className="text-xs md:text-sm font-semibold whitespace-nowrap">{country.name}</span>
-                <div className="flex items-center gap-1">
-                  <span className={`text-xs font-bold px-2 py-1 rounded-full ${
-                    isOccupied 
-                      ? 'bg-yellow-400 text-black' 
-                      : 'bg-emerald-400 text-black'
-                  }`}>
-                    {country.points}
-                  </span>
-                  {isOccupied && (
-                    <span className="text-sm animate-pulse">✅</span>
-                  )}
-                </div>
-              </div>
-            </button>
+<button
+  key={country.id}
+  onClick={() => canSelect && selectCountry(country)}
+  disabled={!canSelect}
+  className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 z-10 ${
+    !canSelect ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-110'
+  }`}
+  style={{
+    left: `${country.position.x}%`,
+    top: `${country.position.y}%`
+  }}
+>
+  <span className={`font-black text-sm transition-all duration-300 ${
+    isOccupied
+      ? occupiedByTeam === 'red'
+        ? 'text-red-400 drop-shadow-[0_2px_4px_rgba(239,68,68,0.8)] hover:text-red-300'
+        : 'text-blue-400 drop-shadow-[0_2px_4px_rgba(59,130,246,0.8)] hover:text-blue-300'
+      : canSelect
+      ? currentTurn === 'red'
+        ? 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-red-300 hover:drop-shadow-[0_2px_8px_rgba(239,68,68,0.6)]'
+        : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-blue-300 hover:drop-shadow-[0_2px_8px_rgba(59,130,246,0.6)]'
+      : 'text-gray-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] opacity-60'
+  } ${canSelect ? 'hover:font-extrabold' : ''}`}>
+    {country.name}
+    {isOccupied && (
+      <span className="ml-1 text-yellow-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">✓</span>
+    )}
+  </span>
+</button>
           );
         })}
 
         {/* ديكور زوايا الخريطة */}
-        <div className="absolute top-2 left-2 text-emerald-400/40 text-xl">🧭</div>
-        <div className="absolute top-2 right-2 text-emerald-400/40 text-xl">⭐</div>
-        <div className="absolute bottom-2 left-2 text-emerald-400/40 text-xl">🏔️</div>
-        <div className="absolute bottom-2 right-2 text-emerald-400/40 text-xl">🌊</div>
+
         
-        {/* إحصائية سريعة */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-          <div className="bg-slate-800/80 backdrop-blur-sm rounded-full px-3 py-1 border border-slate-600/50">
+        إحصائية سريعة
+        {/* <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20">
+          <div className="bg-slate-800/90 backdrop-blur-sm rounded-full px-3 py-1 border border-slate-600/50">
             <span className="text-slate-300 text-xs">
-              محتل: {occupiedCountries.length}/{worldTopic.countries.length}
+              محتل: {occupiedCountries.length}/{worldTopic.countries.length} دولة أوروبية
             </span>
           </div>
+        </div> */}
+      </div>
+
+      {/* 📱 عرض الشبكة للهواتف (مخفي على الشاشات الكبيرة) - ✅ بدون نقاط */}
+      <div className="block md:hidden">
+        <div className="bg-slate-700/30 rounded-xl p-4 mb-4">
+          <p className="text-center text-emerald-400 font-bold text-sm">اختر دولة أوروبية:</p>
+        </div>
+        
+        {/* شبكة الدول للهاتف - ✅ بدون عرض النقاط */}
+        <div className="grid grid-cols-2 gap-3">
+          {worldTopic.countries.map(country => {
+            const isOccupied = occupiedCountries.includes(country.id);
+            const occupiedByTeam = teamCountries.red.includes(country.id) ? 'red' : 
+                                 teamCountries.blue.includes(country.id) ? 'blue' : null;
+            const canSelect = currentTurn && !currentQuestion && !currentChoiceQuestion && !isOccupied;
+
+            return (
+              <button
+                key={country.id}
+                onClick={() => canSelect && selectCountry(country)}
+                disabled={!canSelect}
+                className={`p-3 rounded-lg font-bold text-sm transition-all duration-300 border-2 shadow-md ${
+                  isOccupied
+                    ? occupiedByTeam === 'red'
+                      ? 'bg-gradient-to-br from-red-600 to-red-700 text-white border-red-400'
+                      : 'bg-gradient-to-br from-blue-600 to-blue-700 text-white border-blue-400'
+                    : canSelect
+                    ? currentTurn === 'red'
+                      ? 'bg-gradient-to-br from-gray-700 to-gray-800 hover:from-red-500 hover:to-red-600 text-white border-gray-400 hover:border-red-400'
+                      : 'bg-gradient-to-br from-gray-700 to-gray-800 hover:from-blue-500 hover:to-blue-600 text-white border-gray-400 hover:border-blue-400'
+                    : 'bg-gradient-to-br from-gray-700 to-gray-800 text-gray-400 border-gray-600 cursor-not-allowed opacity-60'
+                }`}
+              >
+                {/* ✅ عرض مبسط بدون نقاط على الهاتف */}
+                <div className="flex flex-col items-center gap-2">
+                  <span className="text-2xl">{country.flag}</span>
+                  <span className="font-semibold">
+                    {country.name}
+                    {isOccupied && (
+                      <span className="block text-yellow-300 text-xs mt-1">✓ محتلة</span>
+                    )}
+                  </span>
+                  {/* ✅ تم حذف عرض النقاط من هنا */}
+                </div>
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -140,7 +166,7 @@ export default function WorldMap({
                 <span className="text-lg text-red-300"> نقطة</span>
               </p>
               <p className="text-red-300 text-sm">
-                {teamCountries.red.length} من {worldTopic.countries.length} دولة محتلة
+                {teamCountries.red.length} من {worldTopic.countries.length} دولة أوروبية محتلة
               </p>
             </div>
             
@@ -155,7 +181,7 @@ export default function WorldMap({
           
           <div className="max-h-32 overflow-y-auto">
             {teamCountries.red.length > 0 ? (
-              <div className="grid grid-cols-2 gap-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
                 {teamCountries.red.map(countryId => {
                   const country = worldTopic.countries.find(c => c.id === countryId);
                   return country ? (
@@ -169,7 +195,7 @@ export default function WorldMap({
               </div>
             ) : (
               <div className="text-red-300/60 text-center py-4 text-sm italic">
-                لم يتم احتلال أي دولة بعد
+                لم يتم احتلال أي دولة أوروبية بعد
               </div>
             )}
           </div>
@@ -191,7 +217,7 @@ export default function WorldMap({
                 <span className="text-lg text-blue-300"> نقطة</span>
               </p>
               <p className="text-blue-300 text-sm">
-                {teamCountries.blue.length} من {worldTopic.countries.length} دولة محتلة
+                {teamCountries.blue.length} من {worldTopic.countries.length} دولة أوروبية محتلة
               </p>
             </div>
             
@@ -206,7 +232,7 @@ export default function WorldMap({
           
           <div className="max-h-32 overflow-y-auto">
             {teamCountries.blue.length > 0 ? (
-              <div className="grid grid-cols-2 gap-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
                 {teamCountries.blue.map(countryId => {
                   const country = worldTopic.countries.find(c => c.id === countryId);
                   return country ? (
@@ -220,7 +246,7 @@ export default function WorldMap({
               </div>
             ) : (
               <div className="text-blue-300/60 text-center py-4 text-sm italic">
-                لم يتم احتلال أي دولة بعد
+                لم يتم احتلال أي دولة أوروبية بعد
               </div>
             )}
           </div>
@@ -238,7 +264,7 @@ export default function WorldMap({
           <span className="text-lg">
             دور {currentTurn === 'red' ? 'الفريق الأحمر' : 'الفريق الأزرق'}
           </span>
-          <span className="text-sm opacity-75">اختر دولة للهجوم!</span>
+          <span className="text-sm opacity-75">اختر دولة أوروبية للهجوم!</span>
         </div>
       </div>
     </div>
