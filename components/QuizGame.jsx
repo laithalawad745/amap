@@ -294,19 +294,6 @@ export default function QuizGame() {
     }, 100);
   };
 
-
-
-  useEffect(() => {
-  if (showConfirmReset || zoomedImage || currentChoiceQuestion || showWorldMap || currentWorldQuestion) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = '';
-  }
-}, [showConfirmReset, zoomedImage, currentChoiceQuestion, showWorldMap, currentWorldQuestion]);
-
-
-  // World Tour Functions
-
 // World Tour Functions
 const selectCountry = (country) => {
   if (currentTurn && !currentQuestion && !currentChoiceQuestion && !currentWorldQuestion) {
@@ -638,14 +625,15 @@ const selectCountry = (country) => {
     } catch (error) {}
   };
 
-  // Overflow Effect
+  // ✅ إدارة الـ overflow - دع WorldQuestion يدير الـ overflow بنفسه
   useEffect(() => {
     if (showConfirmReset || zoomedImage || currentChoiceQuestion || showWorldMap) {
       document.body.style.overflow = 'hidden';
-    } else {
+    } else if (!currentWorldQuestion) {
+      // ✅ لا نغير الـ overflow إذا كان هناك سؤال عالمي - سيديره WorldQuestion
       document.body.style.overflow = '';
     }
-  }, [showConfirmReset, zoomedImage, currentChoiceQuestion, showWorldMap]);
+  }, [showConfirmReset, zoomedImage, currentChoiceQuestion, showWorldMap, currentWorldQuestion]);
 
   // Render Different Game States
   if (gameState === 'setup') {
@@ -765,6 +753,7 @@ const selectCountry = (country) => {
             teamCountries={teamCountries}
             startWorldTour={startWorldTour} // ✅ تمرير الوظيفة الجديدة
             showWorldMap={showWorldMap} // ✅ تمرير حالة العرض
+            worldGameFinished={occupiedCountries && selectedTopics.find(t => t.id === 'world_tour') ? occupiedCountries.length >= selectedTopics.find(t => t.id === 'world_tour').countries.length : false} // ✅ التحقق من انتهاء اللعبة
           />
 
           <ImageModal zoomedImage={zoomedImage} closeZoomedImage={closeZoomedImage} />

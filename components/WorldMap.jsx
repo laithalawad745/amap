@@ -16,7 +16,7 @@ export default function WorldMap({
     <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-4 md:p-8 mb-4 md:mb-8 shadow-2xl border border-slate-700">
       <div className="text-center mb-6">
         <h3 className="font-bold mb-4 p-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl shadow-lg text-lg md:text-xl">
-          🌍 {worldTopic.name}
+           {worldTopic.name}
         </h3>
         <div className="bg-slate-700/30 backdrop-blur-sm rounded-xl p-4 border border-emerald-500/30">
           <p className="text-slate-300 text-sm md:text-base mb-2">
@@ -44,8 +44,6 @@ export default function WorldMap({
 
         {/* طبقة شفافة لتحسين وضوح النص */}
         <div className="absolute inset-0 bg-slate-900/30 rounded-xl"></div>
-
-  
 
         {/* عرض الدول فوق الخريطة - للشاشات الكبيرة */}
         {worldTopic.countries.map(country => {
@@ -86,27 +84,15 @@ export default function WorldMap({
 </button>
           );
         })}
-
-        {/* ديكور زوايا الخريطة */}
-
-        
-        إحصائية سريعة
-        {/* <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20">
-          <div className="bg-slate-800/90 backdrop-blur-sm rounded-full px-3 py-1 border border-slate-600/50">
-            <span className="text-slate-300 text-xs">
-              محتل: {occupiedCountries.length}/{worldTopic.countries.length} دولة أوروبية
-            </span>
-          </div>
-        </div> */}
       </div>
 
-      {/* 📱 عرض الشبكة للهواتف (مخفي على الشاشات الكبيرة) - ✅ بدون نقاط */}
+      {/* 📱 عرض الشبكة للهواتف (مخفي على الشاشات الكبيرة) - ✅ بدون رموز البلدان */}
       <div className="block md:hidden">
         <div className="bg-slate-700/30 rounded-xl p-4 mb-4">
           <p className="text-center text-emerald-400 font-bold text-sm">اختر دولة أوروبية:</p>
         </div>
         
-        {/* شبكة الدول للهاتف - ✅ بدون عرض النقاط */}
+        {/* شبكة الدول للهاتف - ✅ بدون عرض رموز البلدان */}
         <div className="grid grid-cols-2 gap-3">
           {worldTopic.countries.map(country => {
             const isOccupied = occupiedCountries.includes(country.id);
@@ -131,16 +117,15 @@ export default function WorldMap({
                     : 'bg-gradient-to-br from-gray-700 to-gray-800 text-gray-400 border-gray-600 cursor-not-allowed opacity-60'
                 }`}
               >
-                {/* ✅ عرض مبسط بدون نقاط على الهاتف */}
+                {/* ✅ عرض مبسط بدون رموز البلدان على الهاتف */}
                 <div className="flex flex-col items-center gap-2">
-                  <span className="text-2xl">{country.flag}</span>
+            
                   <span className="font-semibold">
                     {country.name}
                     {isOccupied && (
                       <span className="block text-yellow-300 text-xs mt-1">✓ محتلة</span>
                     )}
                   </span>
-                  {/* ✅ تم حذف عرض النقاط من هنا */}
                 </div>
               </button>
             );
@@ -186,7 +171,6 @@ export default function WorldMap({
                   const country = worldTopic.countries.find(c => c.id === countryId);
                   return country ? (
                     <div key={countryId} className="bg-red-600/60 backdrop-blur-sm px-2 py-1 rounded-lg text-xs text-white flex items-center gap-1">
-                      <span>{country.flag}</span>
                       <span className="truncate">{country.name}</span>
                       <span className="text-yellow-300 font-bold">+{country.points}</span>
                     </div>
@@ -237,7 +221,6 @@ export default function WorldMap({
                   const country = worldTopic.countries.find(c => c.id === countryId);
                   return country ? (
                     <div key={countryId} className="bg-blue-600/60 backdrop-blur-sm px-2 py-1 rounded-lg text-xs text-white flex items-center gap-1">
-                      <span>{country.flag}</span>
                       <span className="truncate">{country.name}</span>
                       <span className="text-yellow-300 font-bold">+{country.points}</span>
                     </div>

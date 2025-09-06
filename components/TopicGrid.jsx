@@ -86,26 +86,26 @@ export default function TopicGrid({
                 </div>
               );
             } else if (topic.id === 'world_tour') {
-              // ✅ عرض فقرة حول العالم مع التحقق من انتهاء اللعبة
+              // ✅ عرض فقرة حول العالم مع التحقق المحسن من انتهاء اللعبة
               return (
                 <div key={topic.id} className="text-center">
                   <h3 className="font-bold mb-4 p-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl shadow-lg text-sm md:text-base">
-                    🌍 {topic.name}
+                     {topic.name}
                   </h3>
                   
                   <div className="flex flex-col items-center justify-center space-y-4">
-                    {/* ✅ زر ابدأ مع التحقق من انتهاء اللعبة */}
+                    {/* ✅ زر ابدأ مع التحقق المحسن من انتهاء اللعبة */}
                     <button
                       onClick={startWorldTour}
-                      disabled={worldGameFinished || showWorldMap || currentQuestion || currentChoiceQuestion}
+                      disabled={worldGameFinished || showWorldMap || currentQuestion || currentChoiceQuestion || currentWorldQuestion}
                       className={`px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-lg md:text-xl shadow-lg transition-all duration-300 transform ${
                         worldGameFinished
                           ? 'bg-green-800 text-green-300 cursor-not-allowed opacity-50 border-2 border-green-600'
-                          : showWorldMap || currentQuestion || currentChoiceQuestion
+                          : showWorldMap || currentQuestion || currentChoiceQuestion || currentWorldQuestion
                           ? 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-50'
                           : 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white hover:scale-105'
                       }`}
-                      title={worldGameFinished ? 'انتهت لعبة حول العالم' : ''}
+                      title={worldGameFinished ? 'انتهت فقرة حول أوروبا - تم الإجابة على جميع الأسئلة' : ''}
                     >
                       {worldGameFinished ? '✅ انتهت' : '🗺️ ابدأ'}
                     </button>
@@ -113,7 +113,7 @@ export default function TopicGrid({
                     {/* شريط التقدم */}
                     <div className="w-full p-3 bg-slate-700/50 rounded-lg">
                       <div className="text-xs text-slate-300 mb-2">
-                        التقدم: {occupiedCountries ? occupiedCountries.length : 0}/{topic.countries.length} دولة
+                        التقدم: {occupiedCountries ? occupiedCountries.length : 0}/{topic.countries ? topic.countries.length : 0} دولة أوروبية
                         {worldGameFinished && (
                           <span className="text-green-400 font-bold ml-2">✓ مكتملة</span>
                         )}
@@ -133,13 +133,13 @@ export default function TopicGrid({
                     </div>
 
                     {/* عرض عدد النقاط لكل فريق */}
-                    {(teamCountries.red.length > 0 || teamCountries.blue.length > 0) && (
+                    {(teamCountries && (teamCountries.red.length > 0 || teamCountries.blue.length > 0)) && (
                       <div className="grid grid-cols-2 gap-2 w-full">
                         <div className="bg-red-500/20 rounded-lg p-2">
                           <div className="text-xs font-bold text-red-400">الأحمر</div>
                           <div className="text-sm text-white font-bold">
                             {teamCountries && teamCountries.red ? teamCountries.red.reduce((total, countryId) => {
-                              const country = topic.countries.find(c => c.id === countryId);
+                              const country = topic.countries ? topic.countries.find(c => c.id === countryId) : null;
                               return total + (country ? country.points : 0);
                             }, 0) : 0} نقطة
                           </div>
@@ -149,11 +149,23 @@ export default function TopicGrid({
                           <div className="text-xs font-bold text-blue-400">الأزرق</div>
                           <div className="text-sm text-white font-bold">
                             {teamCountries && teamCountries.blue ? teamCountries.blue.reduce((total, countryId) => {
-                              const country = topic.countries.find(c => c.id === countryId);
+                              const country = topic.countries ? topic.countries.find(c => c.id === countryId) : null;
                               return total + (country ? country.points : 0);
                             }, 0) : 0} نقطة
                           </div>
                         </div>
+                      </div>
+                    )}
+
+                    {/* ✅ رسالة توضيحية عند انتهاء الفقرة */}
+                    {worldGameFinished && (
+                      <div className="w-full p-3 bg-green-500/20 border border-green-400/50 rounded-lg">
+                        <p className="text-green-400 text-xs font-bold">
+                          🎉 تم إنهاء جميع الدول الأوروبية بنجاح!
+                        </p>
+                        <p className="text-green-300 text-xs mt-1">
+                          لا يمكن العودة إلى هذه الفقرة حتى إعادة تشغيل اللعبة
+                        </p>
                       </div>
                     )}
                   </div>

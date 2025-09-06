@@ -1,5 +1,5 @@
 // components/WorldQuestion.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function WorldQuestion({ 
   currentWorldQuestion,
@@ -8,17 +8,34 @@ export default function WorldQuestion({
   awardWorldPoints,
   noCorrectWorldAnswer
 }) {
+  // ✅ منع التمرير خلف الـ modal ومنع تمرير الصفحة
+  useEffect(() => {
+    if (currentWorldQuestion) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.height = '100%';
+      
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.height = '';
+      };
+    }
+  }, [currentWorldQuestion]);
+
   if (!currentWorldQuestion) return null;
 
   return (
-    // ✅ عرض كـ popup/modal overlay
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-slate-800/95 backdrop-blur-lg rounded-2xl p-4 md:p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-slate-600 shadow-2xl">
+    // ✅ عرض كـ popup/modal overlay مع تموضع أفضل
+    <div className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
+      <div className="bg-slate-800/95 backdrop-blur-lg rounded-2xl p-4 md:p-8 max-w-4xl w-full max-h-[85vh] overflow-y-auto border border-slate-600 shadow-2xl transform translate-y-0">
         
         <div className="text-center mb-4 md:mb-6">
-          {/* معلومات الدولة */}
+          {/* معلومات الدولة - ✅ بدون رموز، فقط اسم البلد */}
           <div className="flex justify-center items-center gap-4 mb-4">
-            <span className="text-5xl md:text-6xl">{currentWorldQuestion.country.flag}</span>
+         
             <div>
               <h2 className="text-xl md:text-3xl font-bold text-white mb-2">
                 {currentWorldQuestion.country.name}
