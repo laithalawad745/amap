@@ -1,7 +1,6 @@
-// app/data/diceGameData.js
+  // النرد  
 
 export const diceGameData = {
-  // النرد الأول - أنواع الأسئلة
   questionTypes: [
     {
       id: 1,
@@ -233,6 +232,5 @@ export const diceGameData = {
     }
   ],
 
-  // النرد الثاني - قيم النقاط
   pointValues: [100, 150, 200, 250, 300, 350]
 };

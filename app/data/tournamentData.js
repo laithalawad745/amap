@@ -1,7 +1,5 @@
-// app/data/tournamentData.js
 
 export const tournamentQuestions = [
-  // دور الـ8 (20 نقطة لكل سؤال) - round index 1
   {
     id: 'round8_1',
     question: 'ما هي عاصمة فرنسا؟',
@@ -99,7 +97,6 @@ export const tournamentQuestions = [
     used: false
   },
 
-  // دور الـ4 (40 نقطة لكل سؤال) - round index 2
   {
     id: 'round4_1',
     question: 'من هو مؤلف رواية "مئة عام من العزلة"؟',
@@ -165,7 +162,6 @@ export const tournamentQuestions = [
     used: false
   },
 
-  // نصف النهائي (80 نقطة لكل سؤال) - round index 3
   {
     id: 'semi1',
     question: 'ما هو اسم أطول سلسلة جبال في العالم؟',
@@ -215,7 +211,6 @@ export const tournamentQuestions = [
     used: false
   },
 
-  // النهائي (160 نقطة) - round index 4
   {
     id: 'final1',
     question: 'ما هو اسم أصغر عظمة في جسم الإنسان؟',

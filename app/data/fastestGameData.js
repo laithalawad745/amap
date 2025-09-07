@@ -1,4 +1,3 @@
-// app/data/fastestGameData.js
 
 export const fastestQuestions = [
   {

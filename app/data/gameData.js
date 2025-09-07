@@ -1,5 +1,3 @@
-// ملف بيانات الأسئلة المحدث مع خريطة أوروبا
-// imageUrl: '../../2.jpg'
 
 export const sampleTopics = [
 
@@ -100,7 +98,6 @@ export const sampleTopics = [
       imageUrl: '../../30.jpg'
     },
     
-    // أسئلة صعبة (600 نقطة)
     { 
       id: 'absi11', 
       question: 'من صاحب هذه الحركة', 
@@ -235,7 +232,6 @@ export const sampleTopics = [
       hasImage: true,
       imageUrl: '../../13.jpg'
     },
-    ////////////////1
       { 
         id: 'absi25', 
         question: ' ماذا فعل دردس بعد الاعتداء عليه', 
@@ -265,7 +261,6 @@ export const sampleTopics = [
       hasImage: true,
       imageUrl: '../../34.jpg' 
     },
-    ////////////////2
       { 
         id: 'absi28', 
         question: '  من صاحب النصيب', 
@@ -295,7 +290,6 @@ export const sampleTopics = [
       hasImage: true,
       imageUrl: '../../37.jpg' 
     },
-    //////////////// 3
       { 
         id: 'absi31', 
         question: '  بعد المشاهد الحميمية بين الاخوة من فاز', 
@@ -325,10 +319,8 @@ export const sampleTopics = [
       hasImage: true,
       imageUrl: '../../40.jpg' 
     },
-    ////////////////4
   
  
-    ////////////////
       { 
         id: 'absi37', 
         question: '   ماذا قال عبسي لما سئلوه كيف', 
@@ -358,7 +350,6 @@ export const sampleTopics = [
       hasVideo: true,
       videoUrl: '../../47.mp4' 
     },
-    ///////////////////////////aud
 
   {
   id: 'absi40',
@@ -386,7 +377,6 @@ export const sampleTopics = [
   hasAudio: true,
   audioUrl: '../../absi pubg.mp3'
 },
-/////////////////////aud2
   {
   id: 'absi43',
   question: ' اكمل ماذا حصل',
@@ -413,7 +403,6 @@ export const sampleTopics = [
   hasAudio: true,
   audioUrl: '../../asbi ram.mp3'
 },
-/////////////////////aud3
   {
   id: 'absi46',
   question: ' ....... يقارنو لامين  يامال  ب ',
@@ -435,7 +424,6 @@ export const sampleTopics = [
 ]
 },
 
-// إضافة فقرة الاختيارات الجديدة
 {
   id: 'choices',
   name: 'الاختيارات',
@@ -558,7 +546,6 @@ questions: [
 
 },
 
-// ✅ إضافة فقرة "ولا كلمة" الجديدة مع QR codes
 {
   id: 'qr_game',
   name: 'ولا كلمة',
@@ -571,10 +558,9 @@ questions: [
       points: 200,
       mediaType: 'qr',
       hasQR: true,
-      qrImageUrl: '../../abojaudat.png', // صورة QR code
-      answerImageUrl: '../../1637182067129.jpeg' // صورة الجواب
+      qrImageUrl: '../../abojaudat.png', 
+      answerImageUrl: '../../1637182067129.jpeg' 
     },
-    // يمكنك إضافة المزيد من أسئلة QR هنا
     {
       id: 'qr2',
       question: 'Scan Qr',
@@ -593,8 +579,8 @@ questions: [
       points: 600,
       mediaType: 'qr',
       hasQR: true,
-      qrImageUrl: '../../abomutaz.png', // صورة QR code
-      answerImageUrl: '../../photo_2025-09-05_17-59-01.jpg' // صورة الجواب
+      qrImageUrl: '../../abomutaz.png', 
+      answerImageUrl: '../../photo_2025-09-05_17-59-01.jpg' 
     },  
     
     
@@ -606,10 +592,9 @@ questions: [
       points: 200,
       mediaType: 'qr',
       hasQR: true,
-      qrImageUrl: '../../king.png', // صورة QR code
-      answerImageUrl: '../../photo_2025-09-05_17-59-06.jpg' // صورة الجواب
+      qrImageUrl: '../../king.png', 
+      answerImageUrl: '../../photo_2025-09-05_17-59-06.jpg' 
     },
-    // يمكنك إضافة المزيد من أسئلة QR هنا
     {
       id: 'qr5',
       question: 'Scan Qr',
@@ -628,18 +613,16 @@ questions: [
       points: 600,
       mediaType: 'qr',
       hasQR: true,
-      qrImageUrl: '../../gta.png', // صورة QR code
-      answerImageUrl: '../../photo_2025-09-05_17-59-02.jpg' // صورة الجواب
+      qrImageUrl: '../../gta.png', 
+      answerImageUrl: '../../photo_2025-09-05_17-59-02.jpg' 
     },
   ]
 },
 
-// ✅ فقرة حول أوروبا المحدثة مع الدول الأوروبية فقط
  {
     id: 'world_tour',
     name: 'حول أوروبا',
     countries: [
-      // شمال أوروبا
       {
         id: 'norway',
         name: 'النرويج',
@@ -665,7 +648,6 @@ questions: [
         ]
       },
       
-      // شمال غرب أوروبا
       {
         id: 'uk',
         name: 'بريطانيا',
@@ -691,7 +673,6 @@ questions: [
         ]
       },
 
-      // غرب أوروبا
       {
         id: 'france',
         name: 'فرنسا',
@@ -717,7 +698,6 @@ questions: [
         ]
       },
 
-      // وسط أوروبا
       {
         id: 'germany',
         name: 'ألمانيا',
@@ -743,7 +723,6 @@ questions: [
         ]
       },
 
-      // جنوب أوروبا
       {
         id: 'italy',
         name: 'إيطاليا',
@@ -769,7 +748,6 @@ questions: [
         ]
       },
 
-      // شرق أوروبا/آسيا الصغرى
       {
         id: 'turkey',
         name: 'تركيا',
@@ -845,7 +823,6 @@ questions: [
         ]
       },
 
-      // ✅ تصحيح هذه الدولة - كانت خاطئة
       {
         id: 'ukraine',
         name: 'أوكرانيا',
@@ -950,7 +927,6 @@ questions: [
     id: 'arab_world',
     name: 'حول الوطن العربي',
     countries: [
-      // المغرب العربي
       {
         id: 'morocco',
         name: 'المغرب',
@@ -1051,7 +1027,6 @@ questions: [
         ]
       },
 
-      // المشرق العربي
       {
         id: 'egypt',
         name: 'مصر',
@@ -1102,7 +1077,6 @@ questions: [
         ]
       },
 
-      // بلاد الشام
       {
         id: 'syria',
         name: 'سوريا',
@@ -1203,7 +1177,6 @@ questions: [
         ]
       },
 
-      // دول الخليج العربي
       {
         id: 'saudi',
         name: 'السعودية',
