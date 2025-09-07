@@ -671,7 +671,7 @@ questions: [
         name: 'بريطانيا',
         points: 350,
         flag: '🇬🇧',
-        position: { x: 39, y: 65 },
+        position: { x: 39, y: 57 },
         questions: [
           {
             question: 'ما هي عاصمة بريطانيا؟',
@@ -697,7 +697,7 @@ questions: [
         name: 'فرنسا',
         points: 400,
         flag: '🇫🇷',
-        position: { x: 42 , y: 82  },
+        position: { x: 42 , y: 74  },
         questions: [
           {
             question: 'ما هي عاصمة فرنسا؟',
@@ -723,7 +723,7 @@ questions: [
         name: 'ألمانيا',
         points: 450,
         flag: '🇩🇪',
-        position: { x: 49, y: 70 },
+        position: { x: 49, y: 62 },
         questions: [
           {
             question: 'ما هي عاصمة ألمانيا؟',
@@ -749,7 +749,7 @@ questions: [
         name: 'إيطاليا',
         points: 350,
         flag: '🇮🇹',
-        position: { x: 50, y: 95 },
+        position: { x: 50, y: 80 },
         questions: [
           {
             question: 'ما هي عاصمة إيطاليا؟',
@@ -775,7 +775,7 @@ questions: [
         name: 'تركيا',
         points: 300,
         flag: '🇹🇷',
-        position: { x: 75, y: 95 },
+        position: { x: 75, y: 86 },
         questions: [
           {
             question: 'ما هي عاصمة تركيا؟',
@@ -800,7 +800,7 @@ questions: [
         name: 'هولندا',
         points: 250,
         flag: '🇳🇱',
-        position: { x: 45, y: 65 },
+        position: { x: 45, y: 60 },
         questions: [
           {
             question: 'ما هي عاصمة هولندا؟',
@@ -825,7 +825,7 @@ questions: [
         name: 'بولندا',
         points: 250,
         flag: '🇵🇱',
-        position: { x: 57, y: 65 },
+        position: { x: 57, y: 59 },
         questions: [
           {
             question: 'ما هي عاصمة بولندا؟',
@@ -851,7 +851,7 @@ questions: [
         name: 'أوكرانيا',
         points: 300,
         flag: '🇺🇦',
-        position: { x: 65, y: 70 },
+        position: { x: 65, y: 63 },
         questions: [
           {
             question: 'ما هي عاصمة أوكرانيا؟',
@@ -876,7 +876,7 @@ questions: [
         name: 'السويد',
         points: 250,
         flag: '🇸🇪',
-        position: { x: 53, y: 20 },
+        position: { x: 53, y: 40 },
         questions: [
           {
             question: 'ما هي عاصمة السويد؟',
@@ -901,7 +901,7 @@ questions: [
         name: 'النمسا',
         points: 200,
         flag: '🇦🇹',
-        position: { x: 53, y: 82 },
+        position: { x: 53, y: 72 },
         questions: [
           {
             question: 'ما هي عاصمة النمسا؟',
@@ -926,7 +926,7 @@ questions: [
         name: 'سويسرا',
         points: 250,
         flag: '🇨🇭',
-        position: { x: 47, y: 85 },
+        position: { x: 47, y: 74 },
         questions: [
           {
             question: 'ما هي عاصمة سويسرا؟',

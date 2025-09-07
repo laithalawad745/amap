@@ -22,13 +22,20 @@ export default function GameFinished({ teams, isAbsiMode, resetGame }) {
             انتهت اللعبة! 
           </h1>
           
-          {/* ✅ تحديث عرض نوع المباراة */}
+          {/* تحديث عرض نوع المباراة */}
           {isAbsiMode && (
             <div className="mb-6">
               <span className="inline-block px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold rounded-full mb-3">
                 🏆 المباراة الكاملة 🏆
               </span>
-      
+              <div className="mt-3 p-3 bg-slate-700/50 rounded-xl">
+                <p className="text-slate-300 text-sm">تم إنهاء جميع الفقرات:</p>
+                <div className="flex justify-center gap-4 mt-2 flex-wrap">
+                  <span className="px-2 py-1 bg-purple-500/30 rounded-md text-xs">🎬 لايفات عبسي</span>
+                  <span className="px-2 py-1 bg-purple-500/30 rounded-md text-xs">🎯 الاختيارات</span>
+                  <span className="px-2 py-1 bg-purple-500/30 rounded-md text-xs">📱 ولا كلمة</span>
+                </div>
+              </div>
             </div>
           )}
           
@@ -65,14 +72,6 @@ export default function GameFinished({ teams, isAbsiMode, resetGame }) {
               </p>
             )}
           </div>
-          
-          {/* ✅ إضافة إحصائيات إضافية */}
-          {isAbsiMode && (
-            <div className="mb-6 md:mb-8 p-4 bg-slate-700/50 rounded-xl">
-              <h3 className="text-lg md:text-xl font-bold text-slate-200 mb-3">🎉 تم إنهاء جميع الفقرات بنجاح!</h3>
-       
-            </div>
-          )}
           
           <div className="flex justify-center gap-4">
             <button

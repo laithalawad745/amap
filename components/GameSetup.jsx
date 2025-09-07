@@ -50,9 +50,15 @@ export default function GameSetup({ startAbsiMatch }) {
             >
               🎲 لعبة النرد
             </button>
-          </div>
 
-   
+            {/* حول أوروبا */}
+            <button
+              onClick={() => window.location.href = '/europe'}
+              className="bg-gradient-to-r cursor-pointer from-green-600 via-emerald-600 to-teal-600 hover:from-green-700 hover:via-emerald-700 hover:to-teal-700 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-green-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-green-400/50 hover:border-emerald-400/70"
+            >
+                أوروبا
+            </button>
+          </div>
         </div>
       </div>
     </div>

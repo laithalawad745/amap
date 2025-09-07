@@ -13,8 +13,6 @@ import QuestionDisplay from './QuestionDisplay';
 import ChoiceQuestion from './ChoiceQuestion';
 import TopicGrid from './TopicGrid';
 import GameFinished from './GameFinished';
-import WorldMap from './WorldMap';
-import WorldQuestion from './WorldQuestion';
 import { ImageModal, ConfirmModal } from './Modals';
 
 export default function QuizGame() {
@@ -40,16 +38,6 @@ export default function QuizGame() {
   const [usedChoiceQuestions, setUsedChoiceQuestions] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState({});
 
-  // ✅ World Tour State - إضافة showWorldMap
-  const [showWorldMap, setShowWorldMap] = useState(false);
-  const [currentWorldQuestion, setCurrentWorldQuestion] = useState(null);
-  const [showWorldAnswer, setShowWorldAnswer] = useState(false);
-  const [occupiedCountries, setOccupiedCountries] = useState([]);
-  const [teamCountries, setTeamCountries] = useState({
-    red: [],
-    blue: []
-  });
-
   // Other State
   const [zoomedImage, setZoomedImage] = useState(null);
   
@@ -66,20 +54,6 @@ export default function QuizGame() {
   const [teamQuestionMap, setTeamQuestionMap] = useState({});
   const [usedQuestions, setUsedQuestions] = useState(new Set());
   const [isAbsiMode, setIsAbsiMode] = useState(false);
-
-  // ✅ وظيفة جديدة لبدء فقرة حول العالم
-  const startWorldTour = () => {
-    if (!currentQuestion && !currentChoiceQuestion && !currentWorldQuestion) {
-      setShowWorldMap(true);
-    }
-  };
-
-  // ✅ وظيفة جديدة لإغلاق خريطة العالم
-  const closeWorldMap = () => {
-    setShowWorldMap(false);
-    setCurrentWorldQuestion(null);
-    setShowWorldAnswer(false);
-  };
 
   // Image Functions
   const zoomImage = (imageUrl) => {
@@ -98,16 +72,12 @@ export default function QuizGame() {
       const savedTeams = localStorage.getItem('quiz-teams');
       const savedHelpers = localStorage.getItem('quiz-helpers');
       const savedUsedChoiceQuestions = localStorage.getItem('quiz-used-choice-questions');
-      const savedOccupiedCountries = localStorage.getItem('quiz-occupied-countries');
-      const savedTeamCountries = localStorage.getItem('quiz-team-countries');
       
       if (savedUsedQuestions) setUsedQuestions(new Set(JSON.parse(savedUsedQuestions)));
       if (savedTeamQuestionMap) setTeamQuestionMap(JSON.parse(savedTeamQuestionMap));
       if (savedTeams) setTeams(JSON.parse(savedTeams));
       if (savedHelpers) setHelpers(JSON.parse(savedHelpers));
       if (savedUsedChoiceQuestions) setUsedChoiceQuestions(JSON.parse(savedUsedChoiceQuestions));
-      if (savedOccupiedCountries) setOccupiedCountries(JSON.parse(savedOccupiedCountries));
-      if (savedTeamCountries) setTeamCountries(JSON.parse(savedTeamCountries));
     } catch (error) {
       console.log('localStorage error');
     }
@@ -142,18 +112,6 @@ export default function QuizGame() {
       localStorage.setItem('quiz-used-choice-questions', JSON.stringify(usedChoiceQuestions));
     } catch (error) {}
   }, [usedChoiceQuestions]);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('quiz-occupied-countries', JSON.stringify(occupiedCountries));
-    } catch (error) {}
-  }, [occupiedCountries]);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('quiz-team-countries', JSON.stringify(teamCountries));
-    } catch (error) {}
-  }, [teamCountries]);
 
   // Timer Functions
   const startTimer = () => {
@@ -200,10 +158,9 @@ export default function QuizGame() {
     const absiTopic = sampleTopics.find(topic => topic.id === 'absi');
     const choicesTopic = sampleTopics.find(topic => topic.id === 'choices');
     const qrTopic = sampleTopics.find(topic => topic.id === 'qr_game');
-    const worldTopic = sampleTopics.find(topic => topic.id === 'world_tour');
     
-    if (absiTopic && choicesTopic && qrTopic && worldTopic) {
-      setSelectedTopics([absiTopic, choicesTopic, qrTopic, worldTopic]);
+    if (absiTopic && choicesTopic && qrTopic) {
+      setSelectedTopics([absiTopic, choicesTopic, qrTopic]);
       setIsAbsiMode(true);
       
       const questionMap = {};
@@ -292,101 +249,6 @@ export default function QuizGame() {
     setTimeout(() => {
       checkGameEnd();
     }, 100);
-  };
-
-// World Tour Functions
-const selectCountry = (country) => {
-  if (currentTurn && !currentQuestion && !currentChoiceQuestion && !currentWorldQuestion) {
-    // ✅ اختيار صعوبة عشوائية (سهل، متوسط، صعب)
-    const difficulties = ['easy', 'medium', 'hard'];
-    const randomDifficulty = difficulties[Math.floor(Math.random() * difficulties.length)];
-    
-    // اختيار سؤال عشوائي من الصعوبة المختارة
-    const questionsWithDifficulty = country.questions.filter(q => q.difficulty === randomDifficulty);
-    let selectedQuestion;
-    
-    // إذا لم توجد أسئلة بالصعوبة المختارة، اختر أي سؤال متاح
-    if (questionsWithDifficulty.length > 0) {
-      selectedQuestion = questionsWithDifficulty[Math.floor(Math.random() * questionsWithDifficulty.length)];
-    } else {
-      selectedQuestion = country.questions[Math.floor(Math.random() * country.questions.length)];
-    }
-    
-    setCurrentWorldQuestion({
-      ...selectedQuestion,
-      country: country,
-      // ✅ لا نعرض الصعوبة للمستخدم - سيكون مفاجأة!
-      hiddenDifficulty: selectedQuestion.difficulty
-    });
-    setShowWorldAnswer(false);
-    
-    stopTimer();
-    setTimer(0);
-    setTimeout(() => {
-      startTimer();
-    }, 100);
-  }
-};
-
-  const finishWorldAnswering = () => {
-    setShowWorldAnswer(true);
-  };
-
-  const awardWorldPoints = (team) => {
-    if (currentWorldQuestion) {
-      const newTeams = [...teams];
-      const teamIndex = team === 'red' ? 0 : 1;
-      const countryPoints = currentWorldQuestion.country.points;
-      
-      newTeams[teamIndex].score += countryPoints;
-      setTeams(newTeams);
-      
-      // إضافة الدولة للفريق
-      const newTeamCountries = { ...teamCountries };
-      newTeamCountries[team] = [...newTeamCountries[team], currentWorldQuestion.country.id];
-      setTeamCountries(newTeamCountries);
-      
-      // إضافة الدولة للمحتلة
-      setOccupiedCountries([...occupiedCountries, currentWorldQuestion.country.id]);
-      
-      setCurrentTurn(currentTurn === 'red' ? 'blue' : 'red');
-      setCurrentWorldQuestion(null);
-      setShowWorldAnswer(false);
-      
-      // ✅ التحقق من انتهاء جميع الدول
-      const worldTopic = selectedTopics.find(t => t.id === 'world_tour');
-      if (worldTopic && occupiedCountries.length + 1 >= worldTopic.countries.length) {
-        setTimeout(() => {
-          closeWorldMap();
-          checkGameEnd();
-        }, 2000);
-      } else {
-        setTimeout(() => {
-          checkGameEnd();
-        }, 100);
-      }
-    }
-  };
-
-  const noCorrectWorldAnswer = () => {
-    if (currentWorldQuestion) {
-      setCurrentTurn(currentTurn === 'red' ? 'blue' : 'red');
-      setCurrentWorldQuestion(null);
-      setShowWorldAnswer(false);
-      
-      // ✅ التحقق من انتهاء اللعبة
-      const worldTopic = selectedTopics.find(t => t.id === 'world_tour');
-      if (worldTopic && occupiedCountries.length >= worldTopic.countries.length) {
-        setTimeout(() => {
-          closeWorldMap();
-          checkGameEnd();
-        }, 2000);
-      } else {
-        setTimeout(() => {
-          checkGameEnd();
-        }, 100);
-      }
-    }
   };
 
   // Helper Functions
@@ -539,9 +401,6 @@ const selectCountry = (country) => {
       if (topic.id === 'choices') {
         totalPossibleQuestions += Math.min(8, topic.questions.length);
         totalAnsweredQuestions += usedChoiceQuestions.length;
-      } else if (topic.id === 'world_tour') {
-        totalPossibleQuestions += topic.countries.length;
-        totalAnsweredQuestions += occupiedCountries.length;
       } else if (topic.id === 'absi' || topic.id === 'qr_game') {
         const availableQuestionsForTopic = topic.questions.filter(q => !usedQuestions.has(q.id));
         
@@ -587,14 +446,6 @@ const selectCountry = (country) => {
     setShowChoiceAnswers(false);
     setUsedChoiceQuestions([]);
     setSelectedAnswers({});
-    setCurrentWorldQuestion(null);
-    setShowWorldAnswer(false);
-    setOccupiedCountries([]);
-    setTeamCountries({
-      red: [],
-      blue: []
-    });
-    setShowWorldMap(false); // ✅ إضافة هذا السطر
     
     resetTimer();
     
@@ -620,20 +471,17 @@ const selectCountry = (country) => {
       localStorage.removeItem('quiz-team-question-map');
       localStorage.removeItem('quiz-teams');
       localStorage.removeItem('quiz-helpers');
-      localStorage.removeItem('quiz-occupied-countries');
-      localStorage.removeItem('quiz-team-countries');
     } catch (error) {}
   };
 
-  // ✅ إدارة الـ overflow - دع WorldQuestion يدير الـ overflow بنفسه
+  // إدارة الـ overflow
   useEffect(() => {
-    if (showConfirmReset || zoomedImage || currentChoiceQuestion || showWorldMap) {
+    if (showConfirmReset || zoomedImage || currentChoiceQuestion) {
       document.body.style.overflow = 'hidden';
-    } else if (!currentWorldQuestion) {
-      // ✅ لا نغير الـ overflow إذا كان هناك سؤال عالمي - سيديره WorldQuestion
+    } else {
       document.body.style.overflow = '';
     }
-  }, [showConfirmReset, zoomedImage, currentChoiceQuestion, showWorldMap, currentWorldQuestion]);
+  }, [showConfirmReset, zoomedImage, currentChoiceQuestion]);
 
   // Render Different Game States
   if (gameState === 'setup') {
@@ -646,43 +494,6 @@ const selectCountry = (country) => {
 
   return (
     <>
-      {/* ✅ عرض خريطة العالم كـ modal منفصل */}
-      {showWorldMap && (
-        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm overflow-y-auto">
-          <div className="min-h-screen p-4">
-            {/* زر الإغلاق */}
-            <div className="text-center mb-4">
-              <button
-                onClick={closeWorldMap}
-                className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg transition-all duration-300"
-              >
-                ✕ إغلاق الخريطة
-              </button>
-            </div>
-
-            {/* خريطة العالم */}
-            <WorldMap 
-              worldTopic={selectedTopics.find(t => t.id === 'world_tour')}
-              currentTurn={currentTurn}
-              currentQuestion={currentQuestion}
-              currentChoiceQuestion={currentChoiceQuestion}
-              occupiedCountries={occupiedCountries}
-              selectCountry={selectCountry}
-              teamCountries={teamCountries}
-            />
-
-            {/* عرض السؤال */}
-            <WorldQuestion 
-              currentWorldQuestion={currentWorldQuestion}
-              showWorldAnswer={showWorldAnswer}
-              finishWorldAnswering={finishWorldAnswering}
-              awardWorldPoints={awardWorldPoints}
-              noCorrectWorldAnswer={noCorrectWorldAnswer}
-            />
-          </div>
-        </div>
-      )}
-
       {/* الناف بار - التوقيت ودور الفريق فقط */}
       <NavBar 
         currentTurn={currentTurn}
@@ -741,7 +552,6 @@ const selectCountry = (country) => {
             currentTurn={currentTurn}
             currentQuestion={currentQuestion}
             currentChoiceQuestion={currentChoiceQuestion}
-            currentWorldQuestion={currentWorldQuestion}
             usedChoiceQuestions={usedChoiceQuestions}
             selectChoiceQuestion={selectChoiceQuestion}
             selectRandomQuestionForTeam={selectRandomQuestionForTeam}
@@ -749,11 +559,6 @@ const selectCountry = (country) => {
             getAvailableQuestionsCount={getAvailableQuestionsCount}
             hasUsedQuestionsInLevel={hasUsedQuestionsInLevel}
             setShowConfirmReset={setShowConfirmReset}
-            occupiedCountries={occupiedCountries}
-            teamCountries={teamCountries}
-            startWorldTour={startWorldTour} // ✅ تمرير الوظيفة الجديدة
-            showWorldMap={showWorldMap} // ✅ تمرير حالة العرض
-            worldGameFinished={occupiedCountries && selectedTopics.find(t => t.id === 'world_tour') ? occupiedCountries.length >= selectedTopics.find(t => t.id === 'world_tour').countries.length : false} // ✅ التحقق من انتهاء اللعبة
           />
 
           <ImageModal zoomedImage={zoomedImage} closeZoomedImage={closeZoomedImage} />

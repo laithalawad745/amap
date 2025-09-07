@@ -6,19 +6,13 @@ export default function TopicGrid({
   currentTurn,
   currentQuestion,
   currentChoiceQuestion,
-  currentWorldQuestion,
   usedChoiceQuestions,
   selectChoiceQuestion,
   selectRandomQuestionForTeam,
   isQuestionAvailable,
   getAvailableQuestionsCount,
   hasUsedQuestionsInLevel,
-  setShowConfirmReset,
-  occupiedCountries,
-  teamCountries,
-  startWorldTour,
-  showWorldMap,
-  worldGameFinished // ✅ استقبال حالة انتهاء لعبة حول العالم
+  setShowConfirmReset
 }) {
   return (
     <>
@@ -37,7 +31,7 @@ export default function TopicGrid({
                       <div className="text-xs font-bold text-red-400 mb-1">أحمر</div>
                       {[1, 3, 5, 7].map(order => {
                         const isUsed = usedChoiceQuestions.includes(order);
-                        const canSelect = currentTurn === 'red' && !isUsed && !currentQuestion && !currentChoiceQuestion && !showWorldMap;
+                        const canSelect = currentTurn === 'red' && !isUsed && !currentQuestion && !currentChoiceQuestion;
                         
                         return (
                           <button
@@ -62,7 +56,7 @@ export default function TopicGrid({
                       <div className="text-xs font-bold text-blue-400 mb-1">أزرق</div>
                       {[2, 4, 6, 8].map(order => {
                         const isUsed = usedChoiceQuestions.includes(order);
-                        const canSelect = currentTurn === 'blue' && !isUsed && !currentQuestion && !currentChoiceQuestion && !showWorldMap;
+                        const canSelect = currentTurn === 'blue' && !isUsed && !currentQuestion && !currentChoiceQuestion;
                         
                         return (
                           <button
@@ -85,92 +79,6 @@ export default function TopicGrid({
                   </div>
                 </div>
               );
-            } else if (topic.id === 'world_tour') {
-              // ✅ عرض فقرة حول العالم مع التحقق المحسن من انتهاء اللعبة
-              return (
-                <div key={topic.id} className="text-center">
-                  <h3 className="font-bold mb-4 p-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl shadow-lg text-sm md:text-base">
-                     {topic.name}
-                  </h3>
-                  
-                  <div className="flex flex-col items-center justify-center space-y-4">
-                    {/* ✅ زر ابدأ مع التحقق المحسن من انتهاء اللعبة */}
-                    <button
-                      onClick={startWorldTour}
-                      disabled={worldGameFinished || showWorldMap || currentQuestion || currentChoiceQuestion || currentWorldQuestion}
-                      className={`px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-lg md:text-xl shadow-lg transition-all duration-300 transform ${
-                        worldGameFinished
-                          ? 'bg-green-800 text-green-300 cursor-not-allowed opacity-50 border-2 border-green-600'
-                          : showWorldMap || currentQuestion || currentChoiceQuestion || currentWorldQuestion
-                          ? 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-50'
-                          : 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white hover:scale-105'
-                      }`}
-                      title={worldGameFinished ? 'انتهت فقرة حول أوروبا - تم الإجابة على جميع الأسئلة' : ''}
-                    >
-                      {worldGameFinished ? '✅ انتهت' : '🗺️ ابدأ'}
-                    </button>
-
-                    {/* شريط التقدم */}
-                    <div className="w-full p-3 bg-slate-700/50 rounded-lg">
-                      <div className="text-xs text-slate-300 mb-2">
-                        التقدم: {occupiedCountries ? occupiedCountries.length : 0}/{topic.countries ? topic.countries.length : 0} دولة أوروبية
-                        {worldGameFinished && (
-                          <span className="text-green-400 font-bold ml-2">✓ مكتملة</span>
-                        )}
-                      </div>
-                      <div className="w-full bg-slate-600 rounded-full h-2">
-                        <div 
-                          className={`h-2 rounded-full transition-all duration-300 ${
-                            worldGameFinished 
-                              ? 'bg-gradient-to-r from-green-400 to-emerald-500' 
-                              : 'bg-gradient-to-r from-yellow-400 to-orange-500'
-                          }`}
-                          style={{ 
-                            width: `${occupiedCountries && topic.countries ? (occupiedCountries.length / topic.countries.length) * 100 : 0}%` 
-                          }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    {/* عرض عدد النقاط لكل فريق */}
-                    {(teamCountries && (teamCountries.red.length > 0 || teamCountries.blue.length > 0)) && (
-                      <div className="grid grid-cols-2 gap-2 w-full">
-                        <div className="bg-red-500/20 rounded-lg p-2">
-                          <div className="text-xs font-bold text-red-400">الأحمر</div>
-                          <div className="text-sm text-white font-bold">
-                            {teamCountries && teamCountries.red ? teamCountries.red.reduce((total, countryId) => {
-                              const country = topic.countries ? topic.countries.find(c => c.id === countryId) : null;
-                              return total + (country ? country.points : 0);
-                            }, 0) : 0} نقطة
-                          </div>
-                        </div>
-                        
-                        <div className="bg-blue-500/20 rounded-lg p-2">
-                          <div className="text-xs font-bold text-blue-400">الأزرق</div>
-                          <div className="text-sm text-white font-bold">
-                            {teamCountries && teamCountries.blue ? teamCountries.blue.reduce((total, countryId) => {
-                              const country = topic.countries ? topic.countries.find(c => c.id === countryId) : null;
-                              return total + (country ? country.points : 0);
-                            }, 0) : 0} نقطة
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* ✅ رسالة توضيحية عند انتهاء الفقرة */}
-                    {worldGameFinished && (
-                      <div className="w-full p-3 bg-green-500/20 border border-green-400/50 rounded-lg">
-                        <p className="text-green-400 text-xs font-bold">
-                          🎉 تم إنهاء جميع الدول الأوروبية بنجاح!
-                        </p>
-                        <p className="text-green-300 text-xs mt-1">
-                          لا يمكن العودة إلى هذه الفقرة حتى إعادة تشغيل اللعبة
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
             } else {
               // عرض الأسئلة العادية
               return (
@@ -186,7 +94,7 @@ export default function TopicGrid({
                         const hasTeamUsedThisLevel = hasUsedQuestionsInLevel(topic.id, difficulty, 'red');
                         const isAvailable = isQuestionAvailable(topic.id, difficulty, 'red');
                         const availableCount = getAvailableQuestionsCount(topic.id, difficulty, 'red');
-                        const isDisabled = !isAvailable || currentQuestion !== null || currentChoiceQuestion !== null || currentTurn !== 'red' || hasTeamUsedThisLevel || showWorldMap;
+                        const isDisabled = !isAvailable || currentQuestion !== null || currentChoiceQuestion !== null || currentTurn !== 'red' || hasTeamUsedThisLevel;
                         
                         return (
                           <button
@@ -198,7 +106,7 @@ export default function TopicGrid({
                                 ? 'bg-red-800/60 text-red-200 border-red-600/40 opacity-80 cursor-not-allowed' 
                                 : !isAvailable
                                 ? 'bg-slate-700/70 text-slate-400 cursor-not-allowed border-slate-500/50 opacity-60'
-                                : currentTurn === 'red' && currentQuestion === null && currentChoiceQuestion === null && !showWorldMap
+                                : currentTurn === 'red' && currentQuestion === null && currentChoiceQuestion === null
                                 ? 'bg-gradient-to-br from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white shadow-md hover:shadow-lg border-red-400 hover:scale-105'
                                 : 'bg-red-500/30 text-red-300 cursor-not-allowed border-red-500/30 opacity-75'
                             }`}
@@ -217,7 +125,7 @@ export default function TopicGrid({
                         const hasTeamUsedThisLevel = hasUsedQuestionsInLevel(topic.id, difficulty, 'blue');
                         const isAvailable = isQuestionAvailable(topic.id, difficulty, 'blue');
                         const availableCount = getAvailableQuestionsCount(topic.id, difficulty, 'blue');
-                        const isDisabled = !isAvailable || currentQuestion !== null || currentChoiceQuestion !== null || currentTurn !== 'blue' || hasTeamUsedThisLevel || showWorldMap;
+                        const isDisabled = !isAvailable || currentQuestion !== null || currentChoiceQuestion !== null || currentTurn !== 'blue' || hasTeamUsedThisLevel;
                         
                         return (
                           <button
@@ -229,7 +137,7 @@ export default function TopicGrid({
                                 ? 'bg-blue-800/60 text-blue-200 border-blue-600/40 opacity-80 cursor-not-allowed'
                                 : !isAvailable
                                 ? 'bg-slate-700/70 text-slate-400 cursor-not-allowed border-slate-500/50 opacity-60'
-                                : currentTurn === 'blue' && currentQuestion === null && currentChoiceQuestion === null && !showWorldMap
+                                : currentTurn === 'blue' && currentQuestion === null && currentChoiceQuestion === null
                                 ? 'bg-gradient-to-br from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white shadow-md hover:shadow-lg border-blue-400 hover:scale-105'
                                 : 'bg-blue-500/30 text-blue-300 cursor-not-allowed border-blue-500/30 opacity-75'
                             }`}
