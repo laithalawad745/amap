@@ -1,4 +1,4 @@
-// components/EuropeGame.jsx
+// components/ArabGame.jsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -8,7 +8,7 @@ import WorldMap from './WorldMap';
 import WorldQuestion from './WorldQuestion';
 import { ImageModal } from './Modals';
 
-export default function EuropeGame() {
+export default function ArabGame() {
   // حالة اللعبة
   const [gamePhase, setGamePhase] = useState('setup'); // 'setup', 'playing', 'finished'
   const [teams, setTeams] = useState([
@@ -28,24 +28,24 @@ export default function EuropeGame() {
   
   // حالة أخرى
   const [zoomedImage, setZoomedImage] = useState(null);
-  const [worldTopic, setWorldTopic] = useState(null);
+  const [arabTopic, setArabTopic] = useState(null);
 
-  // تحميل بيانات أوروبا عند بدء المكون
+  // تحميل بيانات الدول العربية عند بدء المكون
   useEffect(() => {
-    const europeData = sampleTopics.find(topic => topic.id === 'world_tour');
-    if (europeData) {
-      setWorldTopic(europeData);
+    const arabData = sampleTopics.find(topic => topic.id === 'arab_world');
+    if (arabData) {
+      setArabTopic(arabData);
     }
   }, []);
 
   // تحميل البيانات المحفوظة
   useEffect(() => {
     try {
-      const savedTeams = localStorage.getItem('europe-teams');
-      const savedOccupiedCountries = localStorage.getItem('europe-occupied-countries');
-      const savedTeamCountries = localStorage.getItem('europe-team-countries');
-      const savedCurrentTurn = localStorage.getItem('europe-current-turn');
-      const savedGamePhase = localStorage.getItem('europe-game-phase');
+      const savedTeams = localStorage.getItem('arab-teams');
+      const savedOccupiedCountries = localStorage.getItem('arab-occupied-countries');
+      const savedTeamCountries = localStorage.getItem('arab-team-countries');
+      const savedCurrentTurn = localStorage.getItem('arab-current-turn');
+      const savedGamePhase = localStorage.getItem('arab-game-phase');
       
       if (savedTeams) setTeams(JSON.parse(savedTeams));
       if (savedOccupiedCountries) setOccupiedCountries(JSON.parse(savedOccupiedCountries));
@@ -60,31 +60,31 @@ export default function EuropeGame() {
   // حفظ البيانات
   useEffect(() => {
     try {
-      localStorage.setItem('europe-teams', JSON.stringify(teams));
+      localStorage.setItem('arab-teams', JSON.stringify(teams));
     } catch (error) {}
   }, [teams]);
 
   useEffect(() => {
     try {
-      localStorage.setItem('europe-occupied-countries', JSON.stringify(occupiedCountries));
+      localStorage.setItem('arab-occupied-countries', JSON.stringify(occupiedCountries));
     } catch (error) {}
   }, [occupiedCountries]);
 
   useEffect(() => {
     try {
-      localStorage.setItem('europe-team-countries', JSON.stringify(teamCountries));
+      localStorage.setItem('arab-team-countries', JSON.stringify(teamCountries));
     } catch (error) {}
   }, [teamCountries]);
 
   useEffect(() => {
     try {
-      localStorage.setItem('europe-current-turn', currentTurn);
+      localStorage.setItem('arab-current-turn', currentTurn);
     } catch (error) {}
   }, [currentTurn]);
 
   useEffect(() => {
     try {
-      localStorage.setItem('europe-game-phase', gamePhase);
+      localStorage.setItem('arab-game-phase', gamePhase);
     } catch (error) {}
   }, [gamePhase]);
 
@@ -148,7 +148,7 @@ export default function EuropeGame() {
       setShowWorldAnswer(false);
       
       // التحقق من انتهاء اللعبة
-      if (worldTopic && newOccupiedCountries.length >= worldTopic.countries.length) {
+      if (arabTopic && newOccupiedCountries.length >= arabTopic.countries.length) {
         setTimeout(() => {
           setGamePhase('finished');
         }, 1500);
@@ -164,7 +164,7 @@ export default function EuropeGame() {
       setShowWorldAnswer(false);
       
       // التحقق من انتهاء اللعبة
-      if (worldTopic && occupiedCountries.length >= worldTopic.countries.length) {
+      if (arabTopic && occupiedCountries.length >= arabTopic.countries.length) {
         setTimeout(() => {
           setGamePhase('finished');
         }, 1500);
@@ -190,21 +190,21 @@ export default function EuropeGame() {
     
     // حذف البيانات المحفوظة
     try {
-      localStorage.removeItem('europe-teams');
-      localStorage.removeItem('europe-occupied-countries');
-      localStorage.removeItem('europe-team-countries');
-      localStorage.removeItem('europe-current-turn');
-      localStorage.removeItem('europe-game-phase');
+      localStorage.removeItem('arab-teams');
+      localStorage.removeItem('arab-occupied-countries');
+      localStorage.removeItem('arab-team-countries');
+      localStorage.removeItem('arab-current-turn');
+      localStorage.removeItem('arab-game-phase');
     } catch (error) {}
   };
 
   // صفحة الإعداد
   if (gamePhase === 'setup') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 select-none flex flex-col">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 select-none flex flex-col">
         <div className="flex justify-between p-4 md:p-8">
-          <h1 className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-400">
-             أوروبا
+          <h1 className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
+            حول الوطن العربي
           </h1>
           <Link 
             href="/"
@@ -217,7 +217,7 @@ export default function EuropeGame() {
         <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8">
           <div className="text-center space-y-8 max-w-2xl">
             <h1 className="text-3xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-                أوروبا
+               حول الوطن العربي
             </h1>
             
             <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-slate-700">
@@ -225,11 +225,11 @@ export default function EuropeGame() {
               <ul className="text-left text-slate-300 space-y-3">
                 <li className="flex items-center gap-3">
                   <span className="text-green-400">🎯</span>
-                  <span>اختر دولة أوروبية للإجابة على سؤال عنها</span>
+                  <span>اختر دولة عربية للإجابة على سؤال عنها</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="text-blue-400">⚔️</span>
-                  <span>كل إجابة صحيحة تحتل الدولة وتكسب نقاطها</span>
+                  <span>كل إجابة صحيحة  للدولة تكسب نقاطها</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="text-purple-400">🏆</span>
@@ -237,7 +237,7 @@ export default function EuropeGame() {
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="text-yellow-400">🌍</span>
-                  <span>{worldTopic ? worldTopic.countries.length : 12} دولة أوروبية متاحة للاحتلال</span>
+                  <span>{arabTopic ? arabTopic.countries.length : 18} دول عربية متاحة </span>
                 </li>
               </ul>
             </div>
@@ -246,7 +246,7 @@ export default function EuropeGame() {
               onClick={startGame}
               className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-12 py-6 rounded-2xl font-bold text-2xl shadow-2xl shadow-green-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-green-400/50"
             >
-              🚀 ابدأ الرحلة الأوروبية!
+              🚀 ابدأ الرحلة العربية!
             </button>
           </div>
         </div>
@@ -260,7 +260,7 @@ export default function EuropeGame() {
                    teams[1].score > teams[0].score ? teams[1] : null;
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4 md:p-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 p-4 md:p-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-8">
             <Link 
@@ -273,7 +273,7 @@ export default function EuropeGame() {
 
           <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-6 md:p-8 text-center shadow-2xl border border-slate-700">
             <h1 className="text-3xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">
-              انتهت الرحلة الأوروبية! 🌍
+              انتهت الرحلة العربية! 🕌
             </h1>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
@@ -302,9 +302,11 @@ export default function EuropeGame() {
             
             <div className="mb-8">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-violet-400">
-                {winner ? `${winner.name} هو  الفائز!   ` : 'تعادل   !'}
+                {winner ? `${winner.name} هو فاتح الوطن العربي!` : 'تعادل في احتلال الوطن العربي!'}
               </h2>
-          
+              <p className="text-lg text-slate-300">
+                تم احتلال {occupiedCountries.length} من {arabTopic ? arabTopic.countries.length : 18} دولة عربية
+              </p>
               <p className="text-md text-slate-400 mt-2">
                 الفارق في النقاط: {Math.abs(teams[0].score - teams[1].score)} نقطة
               </p>
@@ -315,7 +317,7 @@ export default function EuropeGame() {
                 onClick={resetGame}
                 className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg transition-all duration-300"
               >
-                رحلة جديدة 🗺️
+                رحلة جديدة 🕌
               </button>
             </div>
           </div>
@@ -326,12 +328,12 @@ export default function EuropeGame() {
 
   // صفحة اللعب
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-              أوروبا
+             حول الوطن العربي
           </h1>
           <div className="flex gap-4">
             <button
@@ -373,9 +375,9 @@ export default function EuropeGame() {
         </div>
 
         {/* خريطة العالم */}
-        {worldTopic && (
+        {arabTopic && (
           <WorldMap 
-            worldTopic={worldTopic}
+            worldTopic={arabTopic}
             currentTurn={currentTurn}
             currentQuestion={null}
             currentChoiceQuestion={null}

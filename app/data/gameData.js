@@ -946,6 +946,464 @@ questions: [
         ]
       }
     ]
+  },{
+    id: 'arab_world',
+    name: 'حول الوطن العربي',
+    countries: [
+      // المغرب العربي
+      {
+        id: 'morocco',
+        name: 'المغرب',
+        points: 300,
+        flag: '🇲🇦',
+        position: { x: 25, y: 70 },
+        questions: [
+          {
+            question: 'ما هي عاصمة المغرب؟',
+            answer: 'الرباط',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو أشهر مسجد في المغرب؟',
+            answer: 'مسجد الحسن الثاني',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هو اسم الملك الحالي للمغرب؟',
+            answer: 'محمد السادس',
+            difficulty: 'hard'
+          }
+        ]
+      },
+      
+      {
+        id: 'algeria',
+        name: 'الجزائر',
+        points: 350,
+        flag: '🇩🇿',
+        position: { x: 35, y: 65 },
+        questions: [
+          {
+            question: 'ما هي عاصمة الجزائر؟',
+            answer: 'الجزائر',
+            difficulty: 'easy'
+          },
+          {
+            question: 'متى استقلت الجزائر عن فرنسا؟',
+            answer: '1962',
+            difficulty: 'medium'
+          },
+          {
+            question: 'من هو بطل الثورة الجزائرية الشهير؟',
+            answer: 'عبد الحميد بن باديس',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'tunisia',
+        name: 'تونس',
+        points: 250,
+        flag: '🇹🇳',
+        position: { x: 42, y: 62 },
+        questions: [
+          {
+            question: 'ما هي عاصمة تونس؟',
+            answer: 'تونس',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو الاسم القديم لتونس؟',
+            answer: 'قرطاج',
+            difficulty: 'medium'
+          },
+          {
+            question: 'متى انطلقت الثورة التونسية؟',
+            answer: '2010',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'libya',
+        name: 'ليبيا',
+        points: 300,
+        flag: '🇱🇾',
+        position: { x: 50, y: 68 },
+        questions: [
+          {
+            question: 'ما هي عاصمة ليبيا؟',
+            answer: 'طرابلس',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو أهم مورد طبيعي في ليبيا؟',
+            answer: 'النفط',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هو اسم الصحراء الكبرى في ليبيا؟',
+            answer: 'الصحراء الليبية',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      // المشرق العربي
+      {
+        id: 'egypt',
+        name: 'مصر',
+        points: 400,
+        flag: '🇪🇬',
+        position: { x: 55, y: 75 },
+        questions: [
+          {
+            question: 'ما هي عاصمة مصر؟',
+            answer: 'القاهرة',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو أطول نهر في مصر؟',
+            answer: 'النيل',
+            difficulty: 'medium'
+          },
+          {
+            question: 'من هو باني الأهرامات؟',
+            answer: 'الفراعنة',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'sudan',
+        name: 'السودان',
+        points: 250,
+        flag: '🇸🇩',
+        position: { x: 60, y: 85 },
+        questions: [
+          {
+            question: 'ما هي عاصمة السودان؟',
+            answer: 'الخرطوم',
+            difficulty: 'easy'
+          },
+          {
+            question: 'أين يلتقي النيلان الأبيض والأزرق؟',
+            answer: 'الخرطوم',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هو أكبر بلد في أفريقيا سابقاً؟',
+            answer: 'السودان',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      // بلاد الشام
+      {
+        id: 'syria',
+        name: 'سوريا',
+        points: 350,
+        flag: '🇸🇾',
+        position: { x: 65, y: 62 },
+        questions: [
+          {
+            question: 'ما هي عاصمة سوريا؟',
+            answer: 'دمشق',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو لقب دمشق؟',
+            answer: 'الفيحاء أو الشام',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هو أقدم مسجد في دمشق؟',
+            answer: 'المسجد الأموي',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'lebanon',
+        name: 'لبنان',
+        points: 200,
+        flag: '🇱🇧',
+        position: { x: 63, y: 60 },
+        questions: [
+          {
+            question: 'ما هي عاصمة لبنان؟',
+            answer: 'بيروت',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو لقب بيروت؟',
+            answer: 'باريس الشرق',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هو اسم الأرز الشهير في لبنان؟',
+            answer: 'أرز لبنان',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'jordan',
+        name: 'الأردن',
+        points: 250,
+        flag: '🇯🇴',
+        position: { x: 66, y: 68 },
+        questions: [
+          {
+            question: 'ما هي عاصمة الأردن؟',
+            answer: 'عمان',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو الاسم القديم للأردن؟',
+            answer: 'شرق الأردن',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هي المدينة الأثرية الشهيرة في الأردن؟',
+            answer: 'البتراء',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'palestine',
+        name: 'فلسطين',
+        points: 400,
+        flag: '🇵🇸',
+        position: { x: 64, y: 65 },
+        questions: [
+          {
+            question: 'ما هي عاصمة فلسطين؟',
+            answer: 'القدس',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو اسم المسجد الأقصى؟',
+            answer: 'المسجد الأقصى',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هو أول قبلة للمسلمين؟',
+            answer: 'المسجد الأقصى',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      // دول الخليج العربي
+      {
+        id: 'saudi',
+        name: 'السعودية',
+        points: 450,
+        flag: '🇸🇦',
+        position: { x: 75, y: 75 },
+        questions: [
+          {
+            question: 'ما هي عاصمة السعودية؟',
+            answer: 'الرياض',
+            difficulty: 'easy'
+          },
+          {
+            question: 'أين يقع الحرم المكي؟',
+            answer: 'مكة المكرمة',
+            difficulty: 'medium'
+          },
+          {
+            question: 'من هو مؤسس المملكة العربية السعودية؟',
+            answer: 'عبد العزيز آل سعود',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'uae',
+        name: 'الإمارات',
+        points: 300,
+        flag: '🇦🇪',
+        position: { x: 82, y: 78 },
+        questions: [
+          {
+            question: 'ما هي عاصمة الإمارات؟',
+            answer: 'أبو ظبي',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو أطول برج في الإمارات؟',
+            answer: 'برج خليفة',
+            difficulty: 'medium'
+          },
+          {
+            question: 'كم إمارة في دولة الإمارات؟',
+            answer: 'سبع إمارات',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'kuwait',
+        name: 'الكويت',
+        points: 200,
+        flag: '🇰🇼',
+        position: { x: 78, y: 70 },
+        questions: [
+          {
+            question: 'ما هي عاصمة الكويت؟',
+            answer: 'الكويت',
+            difficulty: 'easy'
+          },
+          {
+            question: 'متى تحررت الكويت من الغزو العراقي؟',
+            answer: '1991',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هو أهم مورد اقتصادي في الكويت؟',
+            answer: 'النفط',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'qatar',
+        name: 'قطر',
+        points: 200,
+        flag: '🇶🇦',
+        position: { x: 80, y: 75 },
+        questions: [
+          {
+            question: 'ما هي عاصمة قطر؟',
+            answer: 'الدوحة',
+            difficulty: 'easy'
+          },
+          {
+            question: 'متى استضافت قطر كأس العالم؟',
+            answer: '2022',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هو اسم الخطوط الجوية القطرية؟',
+            answer: 'الخطوط الجوية القطرية',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'bahrain',
+        name: 'البحرين',
+        points: 150,
+        flag: '🇧🇭',
+        position: { x: 79, y: 73 },
+        questions: [
+          {
+            question: 'ما هي عاصمة البحرين؟',
+            answer: 'المنامة',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو الاسم القديم للبحرين؟',
+            answer: 'دلمون',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هو أول بئر نفط في الخليج؟',
+            answer: 'بئر البحرين',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'oman',
+        name: 'عمان',
+        points: 250,
+        flag: '🇴🇲',
+        position: { x: 85, y: 80 },
+        questions: [
+          {
+            question: 'ما هي عاصمة عمان؟',
+            answer: 'مسقط',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو أشهر جبل في عمان؟',
+            answer: 'جبل الأخضر',
+            difficulty: 'medium'
+          },
+          {
+            question: 'من هو السلطان الحالي لعمان؟',
+            answer: 'هيثم بن طارق',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'yemen',
+        name: 'اليمن',
+        points: 300,
+        flag: '🇾🇪',
+        position: { x: 78, y: 85 },
+        questions: [
+          {
+            question: 'ما هي عاصمة اليمن؟',
+            answer: 'صنعاء',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هو لقب اليمن؟',
+            answer: 'اليمن السعيد',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هو أشهر ميناء في اليمن؟',
+            answer: 'عدن',
+            difficulty: 'hard'
+          }
+        ]
+      },
+
+      {
+        id: 'iraq',
+        name: 'العراق',
+        points: 350,
+        flag: '🇮🇶',
+        position: { x: 72, y: 65 },
+        questions: [
+          {
+            question: 'ما هي عاصمة العراق؟',
+            answer: 'بغداد',
+            difficulty: 'easy'
+          },
+          {
+            question: 'ما هما النهران الرئيسيان في العراق؟',
+            answer: 'دجلة والفرات',
+            difficulty: 'medium'
+          },
+          {
+            question: 'ما هو الاسم القديم للعراق؟',
+            answer: 'بلاد الرافدين',
+            difficulty: 'hard'
+          }
+        ]
+      }
+    ]
   }
 
 ];

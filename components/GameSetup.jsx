@@ -58,6 +58,14 @@ export default function GameSetup({ startAbsiMatch }) {
             >
                 أوروبا
             </button>
+
+            {/* حول الوطن العربي */}
+            <button
+              onClick={() => window.location.href = '/arab'}
+              className="bg-gradient-to-r cursor-pointer from-amber-600 via-yellow-600 to-orange-600 hover:from-amber-700 hover:via-yellow-700 hover:to-orange-700 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-amber-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-amber-400/50 hover:border-yellow-400/70"
+            >
+                الوطن العربي
+            </button>
           </div>
         </div>
       </div>
