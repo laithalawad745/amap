@@ -10,4 +10,6 @@ export { default as GameFinished } from './GameFinished';
 export { default as DiceGame } from './DiceGame';
 export { default as DiceComponent } from './DiceComponent';
 export { default as DiceInstructions } from './DiceInstructions';
+export { default as TournamentGame } from './TournamentGame';
+export { default as VisualTournamentGame } from './VisualTournamentGame';
 export { ImageModal, ConfirmModal } from './Modals';

@@ -43,6 +43,14 @@ export default function GameSetup({ startAbsiMatch }) {
               🏃‍♂️ فقرة من أسرع
             </button>
 
+            {/* بطولة المعرفة - الجديدة */}
+            <button
+              onClick={() => window.location.href = '/tournament'}
+              className="bg-gradient-to-r cursor-pointer from-yellow-600 via-orange-500 to-red-500 hover:from-yellow-700 hover:via-orange-600 hover:to-red-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-yellow-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-yellow-400/50 hover:border-orange-400/70"
+            >
+              🏆 بطولة المعرفة
+            </button>
+
             {/* لعبة النرد */}
             <button
               onClick={() => window.location.href = '/dice'}
