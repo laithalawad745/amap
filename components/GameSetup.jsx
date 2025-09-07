@@ -42,15 +42,35 @@ export default function GameSetup({ startAbsiMatch }) {
             >
               🏃‍♂️ فقرة من أسرع
             </button>
+
+            {/* لعبة النرد */}
+            <button
+              onClick={() => window.location.href = '/dice'}
+              className="bg-gradient-to-r cursor-pointer from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-emerald-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-emerald-400/50 hover:border-teal-400/70"
+            >
+              🎲 لعبة النرد
+            </button>
           </div>
 
           {/* معلومات الألعاب */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 max-w-4xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 max-w-6xl">
             {/* المباراة الكاملة */}
-    
+            <div className="bg-slate-800/30 backdrop-blur-lg rounded-xl p-4 border border-purple-400/30">
+              <h3 className="text-purple-400 font-bold mb-2">المباراة الكاملة</h3>
+              <p className="text-slate-300 text-sm">جميع الفقرات مع الأسئلة والاختيارات وحول أوروبا</p>
+            </div>
 
             {/* فقرة من أسرع */}
-     
+            <div className="bg-slate-800/30 backdrop-blur-lg rounded-xl p-4 border border-orange-400/30">
+              <h3 className="text-orange-400 font-bold mb-2">فقرة من أسرع</h3>
+              <p className="text-slate-300 text-sm">منافسة مثيرة بين لاعبين للإجابة الأسرع</p>
+            </div>
+
+            {/* لعبة النرد */}
+            <div className="bg-slate-800/30 backdrop-blur-lg rounded-xl p-4 border border-emerald-400/30">
+              <h3 className="text-emerald-400 font-bold mb-2">لعبة النرد</h3>
+              <p className="text-slate-300 text-sm">ارمِ النردين لتحديد نوع السؤال والنقاط!</p>
+            </div>
           </div>
         </div>
       </div>
