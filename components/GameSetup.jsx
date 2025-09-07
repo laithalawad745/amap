@@ -32,7 +32,7 @@ export default function GameSetup({ startAbsiMatch }) {
               onClick={startAbsiMatch}
               className="bg-gradient-to-r cursor-pointer from-purple-600 via-pink-500 to-blue-500 hover:from-purple-700 hover:via-pink-600 hover:to-blue-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-purple-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-purple-400/50 hover:border-pink-400/70"
             >
-              🏆 المباراة الكاملة
+               المباراة الكاملة
             </button>
 
             {/* فقرة من أسرع */}
@@ -40,7 +40,7 @@ export default function GameSetup({ startAbsiMatch }) {
               onClick={() => window.location.href = '/fastest'}
               className="bg-gradient-to-r cursor-pointer from-orange-500 via-red-500 to-yellow-500 hover:from-orange-600 hover:via-red-600 hover:to-yellow-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-orange-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-orange-400/50 hover:border-red-400/70"
             >
-              🏃‍♂️ فقرة من أسرع
+               فقرة من أسرع
             </button>
 
             {/* بطولة المعرفة - الجديدة */}
@@ -48,7 +48,7 @@ export default function GameSetup({ startAbsiMatch }) {
               onClick={() => window.location.href = '/tournament'}
               className="bg-gradient-to-r cursor-pointer from-yellow-600 via-orange-500 to-red-500 hover:from-yellow-700 hover:via-orange-600 hover:to-red-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-yellow-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-yellow-400/50 hover:border-orange-400/70"
             >
-              🏆 بطولة المعرفة
+              الإقصاء
             </button>
 
             {/* لعبة النرد */}
@@ -56,7 +56,7 @@ export default function GameSetup({ startAbsiMatch }) {
               onClick={() => window.location.href = '/dice'}
               className="bg-gradient-to-r cursor-pointer from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-emerald-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-emerald-400/50 hover:border-teal-400/70"
             >
-              🎲 لعبة النرد
+                النرد
             </button>
 
             {/* حول أوروبا */}
