@@ -956,7 +956,7 @@ questions: [
         name: 'المغرب',
         points: 300,
         flag: '🇲🇦',
-        position: { x: 25, y: 70 },
+        position: { x: 15, y: 21 },
         questions: [
           {
             question: 'ما هي عاصمة المغرب؟',
@@ -981,7 +981,7 @@ questions: [
         name: 'الجزائر',
         points: 350,
         flag: '🇩🇿',
-        position: { x: 35, y: 65 },
+        position: { x: 25, y: 25 },
         questions: [
           {
             question: 'ما هي عاصمة الجزائر؟',
@@ -1006,7 +1006,7 @@ questions: [
         name: 'تونس',
         points: 250,
         flag: '🇹🇳',
-        position: { x: 42, y: 62 },
+        position: { x: 33, y: 21 },
         questions: [
           {
             question: 'ما هي عاصمة تونس؟',
@@ -1031,7 +1031,7 @@ questions: [
         name: 'ليبيا',
         points: 300,
         flag: '🇱🇾',
-        position: { x: 50, y: 68 },
+        position: { x: 40, y: 36 },
         questions: [
           {
             question: 'ما هي عاصمة ليبيا؟',
@@ -1057,7 +1057,7 @@ questions: [
         name: 'مصر',
         points: 400,
         flag: '🇪🇬',
-        position: { x: 55, y: 75 },
+        position: { x: 51, y: 38 },
         questions: [
           {
             question: 'ما هي عاصمة مصر؟',
@@ -1082,7 +1082,7 @@ questions: [
         name: 'السودان',
         points: 250,
         flag: '🇸🇩',
-        position: { x: 60, y: 85 },
+        position: { x: 51, y: 60 },
         questions: [
           {
             question: 'ما هي عاصمة السودان؟',
@@ -1108,7 +1108,7 @@ questions: [
         name: 'سوريا',
         points: 350,
         flag: '🇸🇾',
-        position: { x: 65, y: 62 },
+        position: { x: 60, y: 22 },
         questions: [
           {
             question: 'ما هي عاصمة سوريا؟',
@@ -1133,7 +1133,7 @@ questions: [
         name: 'لبنان',
         points: 200,
         flag: '🇱🇧',
-        position: { x: 63, y: 60 },
+        position: { x: 57, y: 25 },
         questions: [
           {
             question: 'ما هي عاصمة لبنان؟',
@@ -1158,7 +1158,7 @@ questions: [
         name: 'الأردن',
         points: 250,
         flag: '🇯🇴',
-        position: { x: 66, y: 68 },
+        position: { x: 58, y: 31 },
         questions: [
           {
             question: 'ما هي عاصمة الأردن؟',
@@ -1183,7 +1183,7 @@ questions: [
         name: 'فلسطين',
         points: 400,
         flag: '🇵🇸',
-        position: { x: 64, y: 65 },
+        position: { x: 55, y: 29 },
         questions: [
           {
             question: 'ما هي عاصمة فلسطين؟',
@@ -1209,7 +1209,7 @@ questions: [
         name: 'السعودية',
         points: 450,
         flag: '🇸🇦',
-        position: { x: 75, y: 75 },
+        position: { x: 66, y: 45 },
         questions: [
           {
             question: 'ما هي عاصمة السعودية؟',
@@ -1234,7 +1234,7 @@ questions: [
         name: 'الإمارات',
         points: 300,
         flag: '🇦🇪',
-        position: { x: 82, y: 78 },
+        position: { x: 76, y: 43 },
         questions: [
           {
             question: 'ما هي عاصمة الإمارات؟',
@@ -1259,7 +1259,7 @@ questions: [
         name: 'الكويت',
         points: 200,
         flag: '🇰🇼',
-        position: { x: 78, y: 70 },
+        position: { x: 70, y: 32 },
         questions: [
           {
             question: 'ما هي عاصمة الكويت؟',
@@ -1284,7 +1284,7 @@ questions: [
         name: 'قطر',
         points: 200,
         flag: '🇶🇦',
-        position: { x: 80, y: 75 },
+        position: { x: 73, y: 39 },
         questions: [
           {
             question: 'ما هي عاصمة قطر؟',
@@ -1309,7 +1309,7 @@ questions: [
         name: 'البحرين',
         points: 150,
         flag: '🇧🇭',
-        position: { x: 79, y: 73 },
+        position: { x: 72, y: 35 },
         questions: [
           {
             question: 'ما هي عاصمة البحرين؟',
@@ -1334,7 +1334,7 @@ questions: [
         name: 'عمان',
         points: 250,
         flag: '🇴🇲',
-        position: { x: 85, y: 80 },
+        position: { x: 79, y: 50 },
         questions: [
           {
             question: 'ما هي عاصمة عمان؟',
@@ -1359,7 +1359,7 @@ questions: [
         name: 'اليمن',
         points: 300,
         flag: '🇾🇪',
-        position: { x: 78, y: 85 },
+        position: { x: 70, y: 61 },
         questions: [
           {
             question: 'ما هي عاصمة اليمن؟',
@@ -1384,7 +1384,7 @@ questions: [
         name: 'العراق',
         points: 350,
         flag: '🇮🇶',
-        position: { x: 72, y: 65 },
+        position: { x: 64, y: 26 },
         questions: [
           {
             question: 'ما هي عاصمة العراق؟',

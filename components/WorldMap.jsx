@@ -35,8 +35,8 @@ export default function WorldMap({
         <div 
           className="absolute inset-0 bg-no-repeat opacity-50 rounded-xl"
           style={{
-            backgroundImage: `url('/europe-map.png')`,
-            backgroundSize: '85%',           // ✅ الحجم المفضل لديك
+            backgroundImage: `url('/europe-map.png')`, // ✅ خريطة أوروبا فقط
+            backgroundSize: '85%',           
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
           }}
@@ -53,35 +53,35 @@ export default function WorldMap({
           const canSelect = currentTurn && !currentQuestion && !currentChoiceQuestion && !isOccupied;
 
           return (
-<button
-  key={country.id}
-  onClick={() => canSelect && selectCountry(country)}
-  disabled={!canSelect}
-  className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 z-10 ${
-    !canSelect ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-110'
-  }`}
-  style={{
-    left: `${country.position.x}%`,
-    top: `${country.position.y}%`
-  }}
->
-  <span className={`font-black text-sm transition-all duration-300 ${
-    isOccupied
-      ? occupiedByTeam === 'red'
-        ? 'text-red-400 drop-shadow-[0_2px_4px_rgba(239,68,68,0.8)] hover:text-red-300'
-        : 'text-blue-400 drop-shadow-[0_2px_4px_rgba(59,130,246,0.8)] hover:text-blue-300'
-      : canSelect
-      ? currentTurn === 'red'
-        ? 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-red-300 hover:drop-shadow-[0_2px_8px_rgba(239,68,68,0.6)]'
-        : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-blue-300 hover:drop-shadow-[0_2px_8px_rgba(59,130,246,0.6)]'
-      : 'text-gray-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] opacity-60'
-  } ${canSelect ? 'hover:font-extrabold' : ''}`}>
-    {country.name}
-    {isOccupied && (
-      <span className="ml-1 text-yellow-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">✓</span>
-    )}
-  </span>
-</button>
+            <button
+              key={country.id}
+              onClick={() => canSelect && selectCountry(country)}
+              disabled={!canSelect}
+              className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 z-10 ${
+                !canSelect ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-110'
+              }`}
+              style={{
+                left: `${country.position.x}%`,
+                top: `${country.position.y}%`
+              }}
+            >
+              <span className={`font-black text-sm transition-all duration-300 ${
+                isOccupied
+                  ? occupiedByTeam === 'red'
+                    ? 'text-red-400 drop-shadow-[0_2px_4px_rgba(239,68,68,0.8)] hover:text-red-300'
+                    : 'text-blue-400 drop-shadow-[0_2px_4px_rgba(59,130,246,0.8)] hover:text-blue-300'
+                  : canSelect
+                  ? currentTurn === 'red'
+                    ? 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-red-300 hover:drop-shadow-[0_2px_8px_rgba(239,68,68,0.6)]'
+                    : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-blue-300 hover:drop-shadow-[0_2px_8px_rgba(59,130,246,0.6)]'
+                  : 'text-gray-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] opacity-60'
+              } ${canSelect ? 'hover:font-extrabold' : ''}`}>
+                {country.name}
+                {isOccupied && (
+                  <span className="ml-1 text-yellow-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">✓</span>
+                )}
+              </span>
+            </button>
           );
         })}
       </div>
@@ -119,7 +119,6 @@ export default function WorldMap({
               >
                 {/* ✅ عرض مبسط بدون رموز البلدان على الهاتف */}
                 <div className="flex flex-col items-center gap-2">
-            
                   <span className="font-semibold">
                     {country.name}
                     {isOccupied && (

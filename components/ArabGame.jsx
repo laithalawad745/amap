@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { sampleTopics } from '../app/data/gameData';
-import WorldMap from './WorldMap';
+import ArabMap from './ArabMap'; // ✅ تغيير هنا - استخدام ArabMap بدلاً من WorldMap
 import WorldQuestion from './WorldQuestion';
 import { ImageModal } from './Modals';
 
@@ -273,7 +273,7 @@ export default function ArabGame() {
 
           <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-6 md:p-8 text-center shadow-2xl border border-slate-700">
             <h1 className="text-3xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">
-              انتهت الرحلة العربية! 🕌
+              انتهت الرحلة العربية! 
             </h1>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
@@ -302,10 +302,10 @@ export default function ArabGame() {
             
             <div className="mb-8">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-violet-400">
-                {winner ? `${winner.name} هو فاتح الوطن العربي!` : 'تعادل في احتلال الوطن العربي!'}
+                {winner ? `${winner.name} هو   الفائز!` : 'تعادل في احتلال الوطن العربي!'}
               </h2>
               <p className="text-lg text-slate-300">
-                تم احتلال {occupiedCountries.length} من {arabTopic ? arabTopic.countries.length : 18} دولة عربية
+                تم الاجابة  {occupiedCountries.length} من {arabTopic ? arabTopic.countries.length : 18} دولة عربية
               </p>
               <p className="text-md text-slate-400 mt-2">
                 الفارق في النقاط: {Math.abs(teams[0].score - teams[1].score)} نقطة
@@ -317,7 +317,7 @@ export default function ArabGame() {
                 onClick={resetGame}
                 className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg transition-all duration-300"
               >
-                رحلة جديدة 🕌
+                رحلة جديدة 
               </button>
             </div>
           </div>
@@ -374,10 +374,10 @@ export default function ArabGame() {
           </div>
         </div>
 
-        {/* خريطة العالم */}
+        {/* ✅ استخدام ArabMap بدلاً من WorldMap */}
         {arabTopic && (
-          <WorldMap 
-            worldTopic={arabTopic}
+          <ArabMap 
+            arabTopic={arabTopic}
             currentTurn={currentTurn}
             currentQuestion={null}
             currentChoiceQuestion={null}

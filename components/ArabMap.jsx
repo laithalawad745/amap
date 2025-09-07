@@ -23,7 +23,7 @@ export default function ArabMap({
             <span className="text-amber-400 font-bold">⚔️ قواعد اللعب:</span> اختر دولة عربية للإجابة على سؤال عنها
           </p>
           <p className="text-slate-400 text-xs md:text-sm">
-                دولة عربية متاحة
+            {arabTopic.countries.length} دولة عربية متاحة 
           </p>
         </div>
       </div>
@@ -31,11 +31,11 @@ export default function ArabMap({
       {/* 🖥️ عرض الخريطة للشاشات الكبيرة (مخفي على الهاتف) */}
       <div className="hidden md:block relative bg-gradient-to-br from-amber-900/20 to-orange-900/20 rounded-xl p-6 min-h-[500px] md:min-h-[600px] overflow-hidden border-2 border-amber-600/50 shadow-2xl">
         
-        {/* خلفية الخريطة العربية */}
+        {/* ✅ خلفية الخريطة العربية - تغيير هنا */}
         <div 
           className="absolute inset-0 bg-no-repeat opacity-30 rounded-xl"
           style={{
-            backgroundImage: `url('/arab-map.jpg')`,
+            backgroundImage: `url('/arab-map.jpg')`, // ✅ استخدام الخريطة العربية
             backgroundSize: '90%',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
@@ -246,7 +246,7 @@ export default function ArabMap({
                 <span className="text-lg text-red-300"> نقطة</span>
               </p>
               <p className="text-red-300 text-sm">
-                {teamCountries.red.length} من {arabTopic.countries.length} دولة عربية محتلة
+                {teamCountries.red.length} من {arabTopic.countries.length} دولة عربية 
               </p>
             </div>
             
@@ -274,7 +274,7 @@ export default function ArabMap({
               </div>
             ) : (
               <div className="text-red-300/60 text-center py-4 text-sm italic">
-                لم يتم احتلال أي دولة عربية بعد
+                لم يتم اخذ أي دولة عربية بعد
               </div>
             )}
           </div>
@@ -296,7 +296,7 @@ export default function ArabMap({
                 <span className="text-lg text-blue-300"> نقطة</span>
               </p>
               <p className="text-blue-300 text-sm">
-                {teamCountries.blue.length} من {arabTopic.countries.length} دولة عربية محتلة
+                {teamCountries.blue.length} من {arabTopic.countries.length} دولة عربية 
               </p>
             </div>
             
@@ -324,7 +324,7 @@ export default function ArabMap({
               </div>
             ) : (
               <div className="text-blue-300/60 text-center py-4 text-sm italic">
-                لم يتم احتلال أي دولة عربية بعد
+                لم يتم اخذ أي دولة عربية بعد
               </div>
             )}
           </div>
@@ -342,7 +342,7 @@ export default function ArabMap({
           <span className="text-lg">
             دور {currentTurn === 'red' ? 'الفريق الأحمر' : 'الفريق الأزرق'}
           </span>
-          <span className="text-sm opacity-75">اختر دولة عربية للهجوم!</span>
+          <span className="text-sm opacity-75">اختر دولة عربية للاجابة!</span>
         </div>
       </div>
     </div>
