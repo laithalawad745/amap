@@ -925,7 +925,7 @@ questions: [
     ]
   },{
     id: 'arab_world',
-    name: 'حول الوطن العربي',
+    name: ' الوطن العربي',
     countries: [
       {
         id: 'morocco',

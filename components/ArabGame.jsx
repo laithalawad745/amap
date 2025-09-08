@@ -204,7 +204,7 @@ export default function ArabGame() {
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 select-none flex flex-col">
         <div className="flex justify-between p-4 md:p-8">
           <h1 className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-            حول الوطن العربي
+             الوطن العربي
           </h1>
           <Link 
             href="/"
@@ -217,7 +217,7 @@ export default function ArabGame() {
         <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8">
           <div className="text-center space-y-8 max-w-2xl">
             <h1 className="text-3xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-               حول الوطن العربي
+                الوطن العربي
             </h1>
             
             <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-slate-700">
@@ -333,15 +333,15 @@ export default function ArabGame() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-             حول الوطن العربي
+              الوطن العربي
           </h1>
           <div className="flex gap-4">
-            <button
+            {/* <button
               onClick={resetGame}
               className="bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white px-4 py-2 rounded-xl font-bold text-sm shadow-lg transition-all duration-300"
             >
               إعادة تشغيل
-            </button>
+            </button> */}
             <Link 
               href="/"
               className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-xl font-bold text-sm md:text-base shadow-lg transition-all duration-300"
