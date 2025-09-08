@@ -12,4 +12,7 @@ export { default as DiceComponent } from './DiceComponent';
 export { default as DiceInstructions } from './DiceInstructions';
 export { default as TournamentGame } from './TournamentGame';
 export { default as VisualTournamentGame } from './VisualTournamentGame';
+export { default as GuessWhoGame } from './GuessWhoGame';
+export { default as GuessWhoRouter } from './GuessWhoRouter';
 export { ImageModal, ConfirmModal } from './Modals';
+export { default as GuessWhoSetup } from './GuessWhoSetup';

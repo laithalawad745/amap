@@ -74,6 +74,13 @@ export default function GameSetup({ startAbsiMatch }) {
             >
                 الوطن العربي
             </button>
+
+            <button
+  onClick={() => window.location.href = '/guess-who'}
+  className="bg-gradient-to-r cursor-pointer from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-indigo-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-indigo-400/50 hover:border-purple-400/70"
+>
+  من هو؟
+</button>
           </div>
         </div>
       </div>

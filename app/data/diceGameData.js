@@ -18,6 +18,9 @@ export const diceGameData = {
           answer: 'أبو بكر الصديق',
           difficulty: 'easy'
         },
+
+
+        
         {
           question: 'في أي عام سقطت الإمبراطورية البيزنطية؟',
           answer: '1453',
