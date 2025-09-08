@@ -25,12 +25,12 @@ export default function GameSetup({ startAbsiMatch }) {
             قومبز جيم 
           </h1>
           
-          {/* أزرار الألعاب */}
-          <div className="flex flex-col gap-6">
+          {/* أزرار الألعاب - Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* المباراة الكاملة */}
             <button
               onClick={startAbsiMatch}
-              className="bg-gradient-to-r cursor-pointer from-purple-600 via-pink-500 to-blue-500 hover:from-purple-700 hover:via-pink-600 hover:to-blue-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-purple-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-purple-400/50 hover:border-pink-400/70"
+              className="bg-gradient-to-r cursor-pointer from-purple-600 via-pink-500 to-blue-500 hover:from-purple-700 hover:via-pink-600 hover:to-blue-600 text-white px-8 md:px-6 lg:px-8 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-2xl lg:text-3xl shadow-2xl shadow-purple-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-purple-400/50 hover:border-pink-400/70"
             >
                المباراة الكاملة
             </button>
@@ -38,15 +38,15 @@ export default function GameSetup({ startAbsiMatch }) {
             {/* فقرة من أسرع */}
             <button
               onClick={() => window.location.href = '/fastest'}
-              className="bg-gradient-to-r cursor-pointer from-orange-500 via-red-500 to-yellow-500 hover:from-orange-600 hover:via-red-600 hover:to-yellow-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-orange-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-orange-400/50 hover:border-red-400/70"
+              className="bg-gradient-to-r cursor-pointer from-orange-500 via-red-500 to-yellow-500 hover:from-orange-600 hover:via-red-600 hover:to-yellow-600 text-white px-8 md:px-6 lg:px-8 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-2xl lg:text-3xl shadow-2xl shadow-orange-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-orange-400/50 hover:border-red-400/70"
             >
-               فقرة من أسرع
+                 أسرع
             </button>
 
             {/* بطولة المعرفة - الجديدة */}
             <button
               onClick={() => window.location.href = '/tournament'}
-              className="bg-gradient-to-r cursor-pointer from-yellow-600 via-orange-500 to-red-500 hover:from-yellow-700 hover:via-orange-600 hover:to-red-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-yellow-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-yellow-400/50 hover:border-orange-400/70"
+              className="bg-gradient-to-r cursor-pointer from-yellow-600 via-orange-500 to-red-500 hover:from-yellow-700 hover:via-orange-600 hover:to-red-600 text-white px-8 md:px-6 lg:px-8 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-2xl lg:text-3xl shadow-2xl shadow-yellow-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-yellow-400/50 hover:border-orange-400/70"
             >
               الإقصاء
             </button>
@@ -54,7 +54,7 @@ export default function GameSetup({ startAbsiMatch }) {
             {/* لعبة النرد */}
             <button
               onClick={() => window.location.href = '/dice'}
-              className="bg-gradient-to-r cursor-pointer from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-emerald-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-emerald-400/50 hover:border-teal-400/70"
+              className="bg-gradient-to-r cursor-pointer from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white px-8 md:px-6 lg:px-8 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-2xl lg:text-3xl shadow-2xl shadow-emerald-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-emerald-400/50 hover:border-teal-400/70"
             >
                 النرد
             </button>
@@ -62,7 +62,7 @@ export default function GameSetup({ startAbsiMatch }) {
             {/* حول أوروبا */}
             <button
               onClick={() => window.location.href = '/europe'}
-              className="bg-gradient-to-r cursor-pointer from-green-600 via-emerald-600 to-teal-600 hover:from-green-700 hover:via-emerald-700 hover:to-teal-700 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-green-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-green-400/50 hover:border-emerald-400/70"
+              className="bg-gradient-to-r cursor-pointer from-green-600 via-emerald-600 to-teal-600 hover:from-green-700 hover:via-emerald-700 hover:to-teal-700 text-white px-8 md:px-6 lg:px-8 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-2xl lg:text-3xl shadow-2xl shadow-green-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-green-400/50 hover:border-emerald-400/70"
             >
                 أوروبا
             </button>
@@ -70,17 +70,18 @@ export default function GameSetup({ startAbsiMatch }) {
             {/* حول الوطن العربي */}
             <button
               onClick={() => window.location.href = '/arab'}
-              className="bg-gradient-to-r cursor-pointer from-amber-600 via-yellow-600 to-orange-600 hover:from-amber-700 hover:via-yellow-700 hover:to-orange-700 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-amber-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-amber-400/50 hover:border-yellow-400/70"
+              className="bg-gradient-to-r cursor-pointer from-amber-600 via-yellow-600 to-orange-600 hover:from-amber-700 hover:via-yellow-700 hover:to-orange-700 text-white px-8 md:px-6 lg:px-8 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-2xl lg:text-3xl shadow-2xl shadow-amber-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-amber-400/50 hover:border-yellow-400/70"
             >
                 الوطن العربي
             </button>
 
+            {/* من هو؟ */}
             <button
-  onClick={() => window.location.href = '/guess-who'}
-  className="bg-gradient-to-r cursor-pointer from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-3xl lg:text-4xl shadow-2xl shadow-indigo-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-indigo-400/50 hover:border-purple-400/70"
->
-  من هو؟
-</button>
+              onClick={() => window.location.href = '/guess-who'}
+              className="bg-gradient-to-r cursor-pointer from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white px-8 md:px-6 lg:px-8 py-4 md:py-6 lg:py-8 rounded-2xl font-bold text-xl md:text-2xl lg:text-3xl shadow-2xl shadow-indigo-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-indigo-400/50 hover:border-purple-400/70"
+            >
+              من هو؟
+            </button>
           </div>
         </div>
       </div>

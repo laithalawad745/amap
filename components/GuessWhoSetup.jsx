@@ -221,12 +221,7 @@ export default function GuessWhoSetup({ onStartGame, roomIdFromUrl = null }) {
               <div className="bg-slate-700/50 rounded-xl p-4 mb-6">
                 <p className="text-slate-300 mb-2">رقم الغرفة:</p>
                 <p className="text-2xl font-bold text-white mb-4">{roomId}</p>
-                <button
-                  onClick={copyRoomId}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300"
-                >
-                  نسخ رابط الانضمام
-                </button>
+       
               </div>
 
               {!opponentJoined ? (
