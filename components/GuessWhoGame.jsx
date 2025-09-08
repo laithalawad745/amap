@@ -286,7 +286,7 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
     }
 
     if (!opponentCharacter) {
-      alert('لم يتم تحديد شخصية الخصم بعد!');
+      
       return;
     }
 
