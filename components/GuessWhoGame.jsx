@@ -422,16 +422,10 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4 flex items-center justify-center">
         <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-8 text-center max-w-md">
-          <div className={`w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center ${
-            winner === 'me' ? 'bg-green-500' : 'bg-red-500'
-          }`}>
-            <span className="text-3xl">
-              {winner === 'me' ? '🏆' : '😢'}
-            </span>
-          </div>
+ 
 
           <h2 className="text-2xl font-bold mb-4 text-white">
-            {winner === 'me' ? 'مبروك! أنت الفائز!' : 'للأسف خسرت'}
+            {winner === 'me' ? ' أنت الفائز' : ' خسرت'}
           </h2>
 
           <div className="space-y-4 mb-6">
@@ -611,9 +605,7 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
                   <span className="text-white font-medium">{character.name}</span>
                   <button
                     onClick={() => {
-                      if (confirm(`تخمين نهائي: ${character.name}؟\n\n✅ إذا صحيح = تفوز فوراً\n❌ إذا خطأ = دور الخصم`)) {
-                        makeGuess(character);
-                      }
+                     makeGuess(character);
                     }}
                     disabled={!canGuess}
                     className={`px-3 py-1 text-sm font-bold rounded transition-all duration-200 ${

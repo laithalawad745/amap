@@ -152,7 +152,7 @@ export default function GuessWhoSetup({ onStartGame, roomIdFromUrl = null }) {
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-400">
-          لعبة من هو؟
+           من هو؟
         </h1>
         <button
           onClick={() => window.location.href = '/'}
