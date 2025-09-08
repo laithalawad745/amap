@@ -421,14 +421,14 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
                   onClick={() => selectCharacter(character)}
                   className="bg-slate-800/50 backdrop-blur-lg rounded-xl p-4 hover:bg-slate-700/50 transition-all duration-300 border border-slate-600 hover:border-blue-400"
                 >
-                  <img
-                    src={character.image}
-                    alt={character.name}
-                    className="w-full h-32 object-cover rounded-lg mb-2"
-                    onError={(e) => {
-                      e.target.src = 'https://via.placeholder.com/150x150/6366F1/FFFFFF?text=' + character.name;
-                    }}
-                  />
+<img
+  src={character.image}
+  alt={character.name}
+  className="w-full h-32 object-cover object-top rounded-lg mb-2"
+  onError={(e) => {
+    e.target.src = 'https://via.placeholder.com/150x150/6366F1/FFFFFF?text=' + character.name;
+  }}
+/>
                   <p className="text-white font-bold text-center">{character.name}</p>
                   {/* <p className="text-slate-400 text-xs text-center">{character.id}</p> */}
                 </button>
@@ -581,9 +581,9 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
                     <img
                       src={character.image}
                       alt={character.name}
-                      className={`w-full h-32 object-cover rounded-lg border border-slate-600 ${
-                        canInteract && !isEliminated ? 'cursor-pointer hover:opacity-80 hover:border-slate-400' : 'cursor-not-allowed'
-                      }`}
+className={`w-full h-32 object-cover object-top rounded-lg border border-slate-600 ${
+  canInteract && !isEliminated ? 'cursor-pointer hover:opacity-80 hover:border-slate-400' : 'cursor-not-allowed'
+}`}
                       onClick={() => canInteract && !isEliminated && eliminateCharacter(character.id)}
                       onError={(e) => {
                         e.target.src = 'https://via.placeholder.com/150x150/6366F1/FFFFFF?text=' + character.name;
