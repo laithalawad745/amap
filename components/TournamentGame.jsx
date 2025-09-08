@@ -359,7 +359,7 @@ export default function TournamentGame() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">
-            🏆 بطولة المعرفة
+              المعرفة
           </h1>
           <div className="flex gap-4">
             <button

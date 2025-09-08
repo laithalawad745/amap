@@ -246,7 +246,7 @@ export default function ArabGame() {
               onClick={startGame}
               className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-12 py-6 rounded-2xl font-bold text-2xl shadow-2xl shadow-green-500/30 transition-all duration-300 hover:scale-105 transform border-2 border-green-400/50"
             >
-              🚀 ابدأ الرحلة العربية!
+               ابدأ  
             </button>
           </div>
         </div>
@@ -302,7 +302,7 @@ export default function ArabGame() {
             
             <div className="mb-8">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-violet-400">
-                {winner ? `${winner.name} هو   الفائز!` : 'تعادل في احتلال الوطن العربي!'}
+                {winner ? `${winner.name} هو   الفائز!` : 'تعادل في  الوطن العربي!'}
               </h2>
               <p className="text-lg text-slate-300">
                 تم الاجابة  {occupiedCountries.length} من {arabTopic ? arabTopic.countries.length : 18} دولة عربية
