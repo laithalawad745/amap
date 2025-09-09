@@ -553,68 +553,68 @@ questions: [
     {
       id: 'qr1',
       question: 'Scan Qr',
-      answer: ' ابو جودت',
+      answer: '  مسرحية سيف العرب',
       difficulty: 'easy',
       points: 200,
       mediaType: 'qr',
       hasQR: true,
-      qrImageUrl: '../../abojaudat.png', 
-      answerImageUrl: '../../1637182067129.jpeg' 
+      qrImageUrl: '../../qr11.jpg', 
+      answerImageUrl: '../../qr1.jpg' 
     },
     {
       id: 'qr2',
       question: 'Scan Qr',
-      answer: 'قمبز',
+      answer: 'اغنية ابكي اغاني',
       difficulty: 'medium',
       points: 400,
       mediaType: 'qr',
       hasQR: true,
-      qrImageUrl: '../../gombz.png',
-      answerImageUrl: '../../photo_2025-09-05_17-59-00.jpg'
+      qrImageUrl: '../../qr22.jpg',
+      answerImageUrl: '../../qr2.jpg'
     },    {
       id: 'qr3',
       question: 'Scan Qr',
-      answer: ' ابو معتز',
+      answer: ' مسلسل بيبي',
       difficulty: 'hard',
       points: 600,
       mediaType: 'qr',
       hasQR: true,
-      qrImageUrl: '../../abomutaz.png', 
-      answerImageUrl: '../../photo_2025-09-05_17-59-01.jpg' 
+      qrImageUrl: '../../qr33.jpg', 
+      answerImageUrl: '../../qr3.jpg' 
     },  
     
     
     {
       id: 'qr4',
       question: 'Scan Qr',
-      answer: '  اقوى بطولة ب التاريخ',
+      answer: 'فيلم الربس عمر حرب',
       difficulty: 'easy',
       points: 200,
       mediaType: 'qr',
       hasQR: true,
-      qrImageUrl: '../../king.png', 
-      answerImageUrl: '../../photo_2025-09-05_17-59-06.jpg' 
+      qrImageUrl: '../../qr44.jpg', 
+      answerImageUrl: '../../qr4.jpg' 
     },
     {
       id: 'qr5',
       question: 'Scan Qr',
-      answer: ' فورتنايت (افضل لعبة بالتاريخ ) ',
+      answer: 'مسلسل حق عرب ',
       difficulty: 'medium',
       points: 400,
       mediaType: 'qr',
       hasQR: true,
-      qrImageUrl: '../../fortnait.png',
-      answerImageUrl: '../../photo_2025-09-05_17-59-04.jpg'
+      qrImageUrl: '../../qr55.jpg',
+      answerImageUrl: '../../qr5.jpg'
     },    {
       id: 'qr6',
       question: 'Scan Qr',
-      answer: ' قراند مولعة',
+      answer: 'اغنية اتقدم باعتذار',
       difficulty: 'hard',
       points: 600,
       mediaType: 'qr',
       hasQR: true,
-      qrImageUrl: '../../gta.png', 
-      answerImageUrl: '../../photo_2025-09-05_17-59-02.jpg' 
+      qrImageUrl: '../../qr66.jpg', 
+      answerImageUrl: '../../qr6.jpg' 
     },
   ]
 },
