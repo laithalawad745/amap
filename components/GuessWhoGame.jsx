@@ -1,9 +1,15 @@
-// components/GuessWhoGame.jsx - نسخة محدثة مع نظام الأدوار ومنع التكرار
+// components/GuessWhoGame.jsx - نسخة محدثة مع نظام الأدوار ومنع التكرار - 4 مباريات
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import Pusher from 'pusher-js';
-import { guessWhoCharacters, getMatch1Characters, getMatch2Characters } from '../app/data/guessWhoData';
+import { 
+  guessWhoCharacters, 
+  getMatch1Characters, 
+  getMatch2Characters, 
+  getMatch3Characters, 
+  getMatch4Characters 
+} from '../app/data/guessWhoData';
 
 export default function GuessWhoGame({ roomId, onGoBack }) {
   // Game States
@@ -16,8 +22,8 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
   const [turnTimeLeft, setTurnTimeLeft] = useState(30); // 30 ثانية لكل دور
   const [gameMessages, setGameMessages] = useState([]); // رسائل اللعبة
   
-  // Match System - نظام الأدوار
-  const [currentMatch, setCurrentMatch] = useState(1); // 1 أو 2
+  // Match System - نظام الأدوار (4 مباريات)
+  const [currentMatch, setCurrentMatch] = useState(1); // 1, 2, 3, أو 4
   const [availableCharacters, setAvailableCharacters] = useState([]);
   const [usedMatches, setUsedMatches] = useState([]); // المباريات المستخدمة
   
@@ -46,8 +52,12 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
           setCurrentMatch(1);
         } else if (!used.includes(2)) {
           setCurrentMatch(2);
+        } else if (!used.includes(3)) {
+          setCurrentMatch(3);
+        } else if (!used.includes(4)) {
+          setCurrentMatch(4);
         } else {
-          // تمت جميع المباريات - إعادة تعيين
+          // تمت جميع المباريات الأربع - إعادة تعيين
           setCurrentMatch(1);
           setUsedMatches([]);
           localStorage.removeItem('guess-who-used-matches');
@@ -73,12 +83,16 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
     } catch (error) {}
   }, [currentMatch]);
 
-  // تحديد الشخصيات المتاحة حسب المباراة الحالية
+  // تحديد الشخصيات المتاحة حسب المباراة الحالية (4 مباريات)
   useEffect(() => {
     if (currentMatch === 1) {
       setAvailableCharacters(getMatch1Characters());
     } else if (currentMatch === 2) {
       setAvailableCharacters(getMatch2Characters());
+    } else if (currentMatch === 3) {
+      setAvailableCharacters(getMatch3Characters());
+    } else if (currentMatch === 4) {
+      setAvailableCharacters(getMatch4Characters());
     }
   }, [currentMatch]);
 
@@ -286,7 +300,6 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
     }
 
     if (!opponentCharacter) {
-      
       return;
     }
 
@@ -328,21 +341,44 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
     }
   };
 
-  // بدء مباراة جديدة
+  // بدء مباراة جديدة - مُصحح للمباريات الأربع
   const startNewMatch = () => {
+    // إضافة المباراة الحالية للمستخدمة أولاً
+    const updatedUsedMatches = [...usedMatches, currentMatch];
+    
     // تحديد المباراة التالية
     let nextMatch;
-    if (!usedMatches.includes(1)) {
+    if (!updatedUsedMatches.includes(1)) {
       nextMatch = 1;
-    } else if (!usedMatches.includes(2)) {
+    } else if (!updatedUsedMatches.includes(2)) {
       nextMatch = 2;
+    } else if (!updatedUsedMatches.includes(3)) {
+      nextMatch = 3;
+    } else if (!updatedUsedMatches.includes(4)) {
+      nextMatch = 4;
     } else {
-      // إعادة تعيين - بدء من المباراة الأولى
+      // تمت جميع المباريات الأربع - إعادة تعيين للبداية
       nextMatch = 1;
       setUsedMatches([]);
+      localStorage.removeItem('guess-who-used-matches');
+      localStorage.setItem('guess-who-current-match', JSON.stringify(1));
+      
+      setCurrentMatch(1);
+      setGamePhase('waiting');
+      setMyCharacter(null);
+      setOpponentCharacter(null);
+      setEliminatedCharacters([]);
+      setWinner(null);
+      setGameMessages([]);
+      setCurrentTurn(isHost ? playerId : opponentId);
+      return; // إنهاء الدالة هنا
     }
 
+    // تحديث usedMatches و currentMatch
+    setUsedMatches(updatedUsedMatches);
     setCurrentMatch(nextMatch);
+    
+    // إعادة تعيين حالة اللعبة
     setGamePhase('waiting');
     setMyCharacter(null);
     setOpponentCharacter(null);
@@ -352,6 +388,20 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
 
     // إعادة تعيين الدور للمضيف
     setCurrentTurn(isHost ? playerId : opponentId);
+    
+    console.log(`انتقال من المباراة ${currentMatch} إلى المباراة ${nextMatch}`);
+    console.log('المباريات المستخدمة:', updatedUsedMatches);
+  };
+
+  // دالة مساعدة لعرض اسم المباراة
+  const getMatchName = (matchNumber) => {
+    switch(matchNumber) {
+      case 1: return 'ريال مدريد';
+      case 2: return 'الأعلام';
+      case 3: return 'الشخصيات الأولى';
+      case 4: return 'الشخصيات الثانية';
+      default: return `المباراة ${matchNumber}`;
+    }
   };
 
   // Character selection screen
@@ -363,10 +413,10 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
           <div className="flex justify-between items-center mb-6">
             <div>
               <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-400">
-                من هو 
+                من هو - {getMatchName(currentMatch)}
               </h1>
               {/* <p className="text-slate-400 text-sm">
-                {currentMatch === 1 ? 'الشخصيات 1-10' : 'الشخصيات 11-20'}
+                المباراة {currentMatch} من 4
                 {usedMatches.length > 0 && (
                   <span className="ml-2">
                     | مباريات مكتملة: {usedMatches.join(', ')}
@@ -391,7 +441,7 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
                 <h2 className="text-2xl font-bold text-center text-white mb-4">اختر شخصيتك السرية</h2>
                 <p className="text-center text-slate-300 mb-6">اختر الشخصية التي سيحاول خصمك تخمينها</p>
                 {/* <p className="text-center text-yellow-400 text-sm mb-4">
-                  🎯 المباراة {currentMatch}: {currentMatch === 1 ? 'الشخصيات الأولى (1-10)' : 'الشخصيات الثانية (11-20)'}
+                  🎯 {getMatchName(currentMatch)} - المباراة {currentMatch}
                 </p> */}
               </>
             ) : !opponentCharacter ? (
@@ -399,7 +449,7 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
                 <h2 className="text-2xl font-bold text-center text-white mb-4">انتظار اختيار الخصم...</h2>
                 <p className="text-center text-slate-300">لقد اخترت: <span className="text-green-400 font-bold">{myCharacter.name}</span></p>
                 {/* <p className="text-center text-yellow-400 text-sm mt-2">
-                  المباراة {currentMatch} - {currentMatch === 1 ? 'الشخصيات 1-10' : 'الشخصيات 11-20'}
+                  {getMatchName(currentMatch)} - المباراة {currentMatch}
                 </p> */}
               </>
             ) : (
@@ -421,16 +471,15 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
                   onClick={() => selectCharacter(character)}
                   className="bg-slate-800/50 backdrop-blur-lg rounded-xl p-4 hover:bg-slate-700/50 transition-all duration-300 border border-slate-600 hover:border-blue-400"
                 >
-<img
-  src={character.image}
-  alt={character.name}
-  className="w-full h-32 object-cover object-top rounded-lg mb-2"
-  onError={(e) => {
-    e.target.src = 'https://via.placeholder.com/150x150/6366F1/FFFFFF?text=' + character.name;
-  }}
-/>
+                  <img
+                    src={character.image}
+                    alt={character.name}
+                    className="w-full h-32 object-cover object-top rounded-lg mb-2"
+                    onError={(e) => {
+                      e.target.src = 'https://via.placeholder.com/150x150/6366F1/FFFFFF?text=' + character.name;
+                    }}
+                  />
                   <p className="text-white font-bold text-center">{character.name}</p>
-                  {/* <p className="text-slate-400 text-xs text-center">{character.id}</p> */}
                 </button>
               ))}
             </div>
@@ -446,12 +495,12 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4 flex items-center justify-center">
         <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-8 text-center max-w-md">
           <h2 className="text-2xl font-bold mb-4 text-white">
-            {winner === 'me' ? ' أنت الفائز' : ' خسرت'}
+            {winner === 'me' ? 'أنت الفائز' : ' خسرت'}
           </h2>
 
           <div className="space-y-4 mb-6">
             <div className="bg-slate-700/50 rounded-lg p-4">
-              <p className="text-slate-300 mb-2">المباراة  انتهت</p>
+              <p className="text-slate-300 mb-2">{getMatchName(currentMatch)} انتهت</p>
               <p className="text-slate-300 mb-2">شخصيتك كانت:</p>
               <div className="flex items-center gap-3 justify-center">
                 <img
@@ -482,7 +531,11 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
             </div>
 
             {/* معلومات التقدم */}
-   
+            {/* <div className="bg-slate-700/50 rounded-lg p-3">
+              <p className="text-slate-400 text-sm">
+                المباريات المكتملة: {usedMatches.length + 1} من 4
+              </p>
+            </div> */}
           </div>
 
           <div className="space-y-3">
@@ -490,7 +543,7 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
               onClick={startNewMatch}
               className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-6 py-3 rounded-xl font-bold"
             >
-              {usedMatches.length + 1 < 2 ? 'المباراة التالية' : 'مباراة جديدة'}
+              {usedMatches.length + 1 < 4 ? 'المباراة التالية' : 'مباراة جديدة (عودة للأولى)'}
             </button>
             
             <button
@@ -510,14 +563,14 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
-        <div>
+        {/* <div>
           <h1 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-400">
-            من هو 
+            من هو - {getMatchName(currentMatch)}
           </h1>
-          {/* <p className="text-slate-400 text-xs">
-            {currentMatch === 1 ? 'الشخصيات 1-10' : 'الشخصيات 11-20'}
-          </p> */}
-        </div>
+          <p className="text-slate-400 text-xs">
+            المباراة {currentMatch} من 4
+          </p>
+        </div> */}
         
         {/* معلومات الدور */}
         <div className="text-center">
@@ -548,9 +601,9 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
         {/* Characters Grid */}
         <div className="lg:col-span-3">
           <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-6">
-            {/* <h3 className="text-white font-bold text-2xl mb-6 text-center">
-              الشخصيات - المباراة {currentMatch}
-            </h3> */}
+            <h3 className="text-white font-bold text-2xl mb-6 text-center">
+              {getMatchName(currentMatch)} - المباراة {currentMatch}
+            </h3>
             
             {/* تعليمات */}
             <div className="mb-6 text-center">
@@ -581,34 +634,37 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
                     <img
                       src={character.image}
                       alt={character.name}
-className={`w-full h-32 object-cover object-top rounded-lg border border-slate-600 ${
-  canInteract && !isEliminated ? 'cursor-pointer hover:opacity-80 hover:border-slate-400' : 'cursor-not-allowed'
-}`}
+                      className={`w-full h-32 object-cover object-top rounded-lg border border-slate-600 ${
+                        canInteract && !isEliminated ?
+                        'cursor-pointer hover:border-red-400 hover:opacity-80' : 
+                        'cursor-not-allowed'
+                      }`}
                       onClick={() => canInteract && !isEliminated && eliminateCharacter(character.id)}
                       onError={(e) => {
                         e.target.src = 'https://via.placeholder.com/150x150/6366F1/FFFFFF?text=' + character.name;
                       }}
                     />
-                    <p className="text-white text-sm text-center mt-2 font-bold">
-                      {character.name}
-                    </p>
-                    {/* <p className="text-slate-400 text-xs text-center">{character.id}</p> */}
                     
-                    {/* X للاستبعاد */}
+                    {/* زر التخمين */}
+                    {canInteract && !isEliminated && (
+                      <button
+                        onClick={() => makeGuess(character)}
+                        className="absolute bottom-2 right-2 bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-xs font-bold"
+                      >
+                        تخمين
+                      </button>
+                    )}
+                    
+                    {/* X للمستبعدة */}
                     {isEliminated && (
-                      <div className="absolute inset-0 bg-red-500/30 rounded-lg flex items-center justify-center">
-                        <span className="text-red-500 text-3xl font-bold">✗</span>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="bg-red-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl font-bold">
+                          ✕
+                        </div>
                       </div>
                     )}
                     
-                    {/* مؤشر عدم القدرة على اللعب */}
-                    {!canInteract && (
-                      <div className="absolute inset-0 bg-black/40 rounded-lg flex items-center justify-center">
-                        <span className="text-white text-xs bg-red-500 px-2 py-1 rounded font-bold">
-                          ليس دورك
-                        </span>
-                      </div>
-                    )}
+                    <p className="text-white font-bold text-center mt-2">{character.name}</p>
                   </div>
                 );
               })}
@@ -616,36 +672,35 @@ className={`w-full h-32 object-cover object-top rounded-lg border border-slate-6
           </div>
         </div>
 
-        {/* قائمة الشخصيات للتخمين النهائي */}
-        <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-4 flex flex-col h-96">
-          <h3 className="text-white font-bold text-lg mb-4 text-center">التخمين النهائي</h3>
-          
-          <div className="flex-1 overflow-y-auto space-y-2">
-            {availableCharacters.map(character => {
-              const canGuess = currentTurn === playerId;
-              return (
+        {/* Right Sidebar */}
+        <div className="lg:col-span-1">
+          <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-4">
+            <h3 className="text-white font-bold text-lg mb-4">رسائل اللعبة</h3>
+            
+            {/* Timer */}
+            <div className="mb-4 text-center">
+              <div className={`text-2xl font-bold ${
+                turnTimeLeft <= 10 ? 'text-red-400' : 'text-green-400'
+              }`}>
+                {turnTimeLeft}s
+              </div>
+            </div>
+            
+            {/* Messages */}
+            <div className="space-y-2 max-h-64 overflow-y-auto">
+              {gameMessages.slice(-10).map((msg, index) => (
                 <div
-                  key={character.id}
-                  className="flex items-center justify-between p-2 bg-slate-700/50 rounded-lg"
+                  key={index}
+                  className={`p-2 rounded text-sm ${
+                    msg.type === 'correct' ? 'bg-green-500/20 text-green-300' :
+                    msg.type === 'wrong' ? 'bg-red-500/20 text-red-300' :
+                    'bg-slate-700/50 text-slate-300'
+                  }`}
                 >
-                  <div>
-                    <span className="text-white font-medium">{character.name}</span>
-                    {/* <span className="text-slate-400 text-xs ml-2">({character.id})</span> */}
-                  </div>
-                  <button
-                    onClick={() => makeGuess(character)}
-                    disabled={!canGuess}
-                    className={`px-3 py-1 text-sm font-bold rounded transition-all duration-200 ${
-                      canGuess 
-                        ? 'bg-orange-500 hover:bg-orange-600 text-white' 
-                        : 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                    }`}
-                  >
-                    تخمين
-                  </button>
+                  {msg.text}
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
       </div>

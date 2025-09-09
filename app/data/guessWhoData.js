@@ -96,7 +96,7 @@ export const guessWhoCharacters = [
   {
     id: 'char19',
     name: 'فرنسا',
-    image: '../../france.jpg'
+    image: '../../franc.jpg'
   },
   {
     id: 'char20',
