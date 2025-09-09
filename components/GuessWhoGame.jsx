@@ -1,4 +1,4 @@
-// components/GuessWhoGame.jsx - نسخة محدثة مع نظام الأدوار ومنع التكرار - 4 مباريات
+// components/GuessWhoGame.jsx - نسخة محدثة مع قائمة التخمين في الشريط الجانبي
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -415,14 +415,6 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
               <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-400">
                 من هو - {getMatchName(currentMatch)}
               </h1>
-              {/* <p className="text-slate-400 text-sm">
-                المباراة {currentMatch} من 4
-                {usedMatches.length > 0 && (
-                  <span className="ml-2">
-                    | مباريات مكتملة: {usedMatches.join(', ')}
-                  </span>
-                )}
-              </p> */}
             </div>
             
             {usedMatches.length > 0 && (
@@ -440,17 +432,11 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
               <>
                 <h2 className="text-2xl font-bold text-center text-white mb-4">اختر شخصيتك السرية</h2>
                 <p className="text-center text-slate-300 mb-6">اختر الشخصية التي سيحاول خصمك تخمينها</p>
-                {/* <p className="text-center text-yellow-400 text-sm mb-4">
-                  🎯 {getMatchName(currentMatch)} - المباراة {currentMatch}
-                </p> */}
               </>
             ) : !opponentCharacter ? (
               <>
                 <h2 className="text-2xl font-bold text-center text-white mb-4">انتظار اختيار الخصم...</h2>
                 <p className="text-center text-slate-300">لقد اخترت: <span className="text-green-400 font-bold">{myCharacter.name}</span></p>
-                {/* <p className="text-center text-yellow-400 text-sm mt-2">
-                  {getMatchName(currentMatch)} - المباراة {currentMatch}
-                </p> */}
               </>
             ) : (
               <>
@@ -529,13 +515,6 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
                 <span className="text-white font-bold">{opponentCharacter?.name}</span>
               </div>
             </div>
-
-            {/* معلومات التقدم */}
-            {/* <div className="bg-slate-700/50 rounded-lg p-3">
-              <p className="text-slate-400 text-sm">
-                المباريات المكتملة: {usedMatches.length + 1} من 4
-              </p>
-            </div> */}
           </div>
 
           <div className="space-y-3">
@@ -563,15 +542,6 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
-        {/* <div>
-          <h1 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-400">
-            من هو - {getMatchName(currentMatch)}
-          </h1>
-          <p className="text-slate-400 text-xs">
-            المباراة {currentMatch} من 4
-          </p>
-        </div> */}
-        
         {/* معلومات الدور */}
         <div className="text-center">
           <div className={`px-4 py-2 rounded-lg font-bold text-lg ${
@@ -613,7 +583,7 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
                   : 'text-red-400 bg-red-500/20'
               }`}>
                 {currentTurn === playerId 
-                  ? '✅ دورك: اضغط الشخصية لاستبعادها • اضغط التخمين للفوز!' 
+                  ? '✅ دورك: اضغط الشخصية لاستبعادها • استخدم قائمة التخمين ←' 
                   : '❌ دور الخصم: انتظر دورك'
                 }
               </div>
@@ -645,16 +615,6 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
                       }}
                     />
                     
-                    {/* زر التخمين */}
-                    {canInteract && !isEliminated && (
-                      <button
-                        onClick={() => makeGuess(character)}
-                        className="absolute bottom-0 right-2 bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-xs font-bold"
-                      >
-                        تخمين
-                      </button>
-                    )}
-                    
                     {/* X للمستبعدة */}
                     {isEliminated && (
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -672,11 +632,12 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
           </div>
         </div>
 
-        {/* Right Sidebar */}
-        {/* <div className="lg:col-span-1">
+        {/* Right Sidebar - قائمة التخمين */}
+        <div className="lg:col-span-1">
           <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-4">
-            <h3 className="text-white font-bold text-lg mb-4">رسائل اللعبة</h3>
+            <h3 className="text-white font-bold text-lg mb-4 text-center">🎯 قائمة التخمين</h3>
             
+            {/* العداد الزمني */}
             <div className="mb-4 text-center">
               <div className={`text-2xl font-bold ${
                 turnTimeLeft <= 10 ? 'text-red-400' : 'text-green-400'
@@ -685,22 +646,89 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
               </div>
             </div>
             
-            <div className="space-y-2 max-h-64 overflow-y-auto">
-              {gameMessages.slice(-10).map((msg, index) => (
-                <div
-                  key={index}
-                  className={`p-2 rounded text-sm ${
-                    msg.type === 'correct' ? 'bg-green-500/20 text-green-300' :
-                    msg.type === 'wrong' ? 'bg-red-500/20 text-red-300' :
-                    'bg-slate-700/50 text-slate-300'
-                  }`}
-                >
-                  {msg.text}
-                </div>
-              ))}
+            {/* رسالة إرشادية */}
+            {currentTurn !== playerId && (
+              <div className="bg-red-500/20 text-red-300 p-3 rounded-lg mb-4 text-center text-sm">
+                انتظر دورك للتخمين
+              </div>
+            )}
+            
+            {/* قائمة الأسماء مع أزرار التخمين */}
+            <div className="space-y-2 max-h-96 overflow-y-auto">
+              {availableCharacters.map(character => {
+                const isEliminated = eliminatedCharacters.includes(character.id);
+                const canGuess = currentTurn === playerId && !isEliminated;
+                
+                return (
+                  <div
+                    key={character.id}
+                    className={`flex items-center justify-between p-2 rounded-lg border transition-all duration-200 ${
+                      isEliminated 
+                        ? 'bg-red-500/10 border-red-500/30 opacity-50' 
+                        : 'bg-slate-700/50 border-slate-600 hover:border-blue-400'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 flex-1">
+                      <img
+                        src={character.image}
+                        alt={character.name}
+                        className="w-8 h-8 rounded object-cover"
+                        onError={(e) => {
+                          e.target.src = 'https://via.placeholder.com/32x32/6366F1/FFFFFF?text=' + character.name.slice(0,1);
+                        }}
+                      />
+                      <span className={`text-sm font-medium ${
+                        isEliminated ? 'text-red-400 line-through' : 'text-white'
+                      }`}>
+                        {character.name}
+                      </span>
+                    </div>
+                    
+                    {!isEliminated && (
+                      <button
+                        onClick={() => makeGuess(character)}
+                        disabled={!canGuess}
+                        className={`px-3 py-1 rounded text-xs font-bold transition-all duration-200 ${
+                          canGuess
+                            ? 'bg-green-500 hover:bg-green-600 text-white'
+                            : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                        }`}
+                      >
+                        تخمين
+                      </button>
+                    )}
+                    
+                    {isEliminated && (
+                      <div className="text-red-400 text-lg">✕</div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
+
+            {/* رسائل اللعبة */}
+            {gameMessages.length > 0 && (
+              <>
+                <hr className="border-slate-600 my-4" />
+                <h4 className="text-white font-medium text-sm mb-2">آخر الأحداث:</h4>
+                <div className="space-y-1 max-h-32 overflow-y-auto">
+                  {gameMessages.slice(-5).map((msg, index) => (
+                    <div
+                      key={index}
+                      className={`p-2 rounded text-xs ${
+                        msg.type === 'correct' ? 'bg-green-500/20 text-green-300' :
+                        msg.type === 'wrong' ? 'bg-red-500/20 text-red-300' :
+                        'bg-slate-700/50 text-slate-300'
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
