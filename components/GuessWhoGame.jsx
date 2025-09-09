@@ -543,7 +543,7 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
               onClick={startNewMatch}
               className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-6 py-3 rounded-xl font-bold"
             >
-              {usedMatches.length + 1 < 4 ? 'المباراة التالية' : 'مباراة جديدة (عودة للأولى)'}
+              {usedMatches.length + 1 < 4 ? 'المباراة التالية' : 'مباراة جديدة'}
             </button>
             
             <button
@@ -649,7 +649,7 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
                     {canInteract && !isEliminated && (
                       <button
                         onClick={() => makeGuess(character)}
-                        className="absolute bottom-2 right-2 bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-xs font-bold"
+                        className="absolute bottom-0 right-2 bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-xs font-bold"
                       >
                         تخمين
                       </button>
@@ -673,11 +673,10 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
         </div>
 
         {/* Right Sidebar */}
-        <div className="lg:col-span-1">
+        {/* <div className="lg:col-span-1">
           <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-4">
             <h3 className="text-white font-bold text-lg mb-4">رسائل اللعبة</h3>
             
-            {/* Timer */}
             <div className="mb-4 text-center">
               <div className={`text-2xl font-bold ${
                 turnTimeLeft <= 10 ? 'text-red-400' : 'text-green-400'
@@ -686,7 +685,6 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
               </div>
             </div>
             
-            {/* Messages */}
             <div className="space-y-2 max-h-64 overflow-y-auto">
               {gameMessages.slice(-10).map((msg, index) => (
                 <div
@@ -702,7 +700,7 @@ export default function GuessWhoGame({ roomId, onGoBack }) {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
